@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Digital Encore</title>
+    <meta name="description" content="Digital Encore provides professional web development and automation solutions. Smarter websites, intelligent systems, and better customer experiences.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="encore-header">
+        <nav class="encore-nav">
+            <div class="encore-nav-container">
+                <a href="index.html" class="encore-logo">
+                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img">
+                </a>
+                
+                <div class="encore-nav-menu" id="encoreNavMenu">
+                    <a href="index.html" class="encore-nav-link encore-nav-link-active">Home</a>
+                    <a href="services.html" class="encore-nav-link">Services</a>
+                    <a href="why-choose-us.html" class="encore-nav-link">Why Choose Us</a>
+                    <a href="contact.html" class="encore-nav-link">Contact</a>
+                </div>
+                
+                <div class="encore-nav-controls">
+                    <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon encore-theme-icon"></i>
+                    </button>
+                    <button class="encore-mobile-toggle" id="encoreMobileToggle" aria-label="Toggle mobile menu">
+                        <span class="encore-hamburger"></span>
+                        <span class="encore-hamburger"></span>
+                        <span class="encore-hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="encore-home" class="encore-hero">
+        <div class="encore-hero-container">
+            <div class="encore-hero-content">
+                <h1 class="encore-hero-title">
+                    <span class="encore-hero-highlight">Smarter websites.</span>
+                    <span class="encore-hero-highlight">Intelligent systems.</span>
+                    <span class="encore-hero-highlight">Better customer experiences.</span>
+                </h1>
+                <p class="encore-hero-description">
+                    Digital Encore is your all-in-one partner for professional web development and automation solutions. 
+                    We transform your business with modern websites and intelligent systems that work 24/7.
+                </p>
+                <div class="encore-hero-actions">
+                    <a href="services.html" class="encore-btn encore-btn-primary">Explore Services</a>
+                    <a href="contact.html" class="encore-btn encore-btn-secondary">Get Free Consultation</a>
+                </div>
+            </div>
+            <div class="encore-hero-visual">
+                <div class="encore-hero-card">
+                    <div class="encore-hero-card-header">
+                        <div class="encore-hero-dots">
+                            <span class="encore-dot encore-dot-red"></span>
+                            <span class="encore-dot encore-dot-yellow"></span>
+                            <span class="encore-dot encore-dot-green"></span>
+                        </div>
+                    </div>
+                    <div class="encore-hero-card-content">
+                        <div class="encore-hero-code">
+                            <span class="encore-code-line">
+                                <span class="encore-code-keyword">const</span> 
+                                <span class="encore-code-variable">business</span> = {
+                            </span>
+                            <span class="encore-code-line">
+                                &nbsp;&nbsp;<span class="encore-code-property">website</span>: 
+                                <span class="encore-code-string">"Professional"</span>,
+                            </span>
+                            <span class="encore-code-line">
+                                &nbsp;&nbsp;<span class="encore-code-property">automation</span>: 
+                                <span class="encore-code-string">"Intelligent"</span>,
+                            </span>
+                            <span class="encore-code-line">
+                                &nbsp;&nbsp;<span class="encore-code-property">experience</span>: 
+                                <span class="encore-code-string">"Exceptional"</span>
+                            </span>
+                            <span class="encore-code-line">};</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="encore-services" class="encore-services">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h2 class="encore-section-title">Our Services</h2>
+                <p class="encore-section-description">
+                    Comprehensive solutions designed to elevate your business and enhance customer experiences
+                </p>
+            </div>
+            
+            <div class="encore-services-grid">
+                <!-- Website Solutions -->
+                <div class="encore-service-card">
+                    <div class="encore-service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="encore-service-title">Website Solutions</h3>
+                    <p class="encore-service-description">
+                        Modern, responsive websites that represent your brand and convert visitors into customers. 
+                        Optimized for user experience and seamless navigation across all devices.
+                    </p>
+                    <ul class="encore-service-features">
+                        <li>Professional design & development</li>
+                        <li>Mobile-first responsive layout</li>
+                        <li>SEO optimization</li>
+                        <li>Fast loading performance</li>
+                    </ul>
+                </div>
+
+                <!-- Business System Automation -->
+                <div class="encore-service-card">
+                    <div class="encore-service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="encore-service-title">Business System Automation</h3>
+                    <p class="encore-service-description">
+                        Smart workflows that eliminate repetitive tasks and automatically organize customer data. 
+                        Streamline your processes and never miss a lead again.
+                    </p>
+                    <ul class="encore-service-features">
+                        <li>Automated form processing</li>
+                        <li>Instant team notifications</li>
+                        <li>Data organization & tracking</li>
+                        <li>Workflow optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Customer Experience Solutions -->
+                <div class="encore-service-card">
+                    <div class="encore-service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="encore-service-title">Customer Experience Solutions</h3>
+                    <p class="encore-service-description">
+                        AI-powered communication tools and automated support systems that provide instant responses 
+                        and personalized customer experiences.
+                    </p>
+                    <ul class="encore-service-features">
+                        <li>AI-powered chat assistance</li>
+                        <li>Automated support tickets</li>
+                        <li>Customer profile management</li>
+                        <li>24/7 intelligent responses</li>
+                    </ul>
+                </div>
+
+                <!-- Custom Features & Enhancements -->
+                <div class="encore-service-card">
+                    <div class="encore-service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="encore-service-title">Custom Features & Enhancements</h3>
+                    <p class="encore-service-description">
+                        Tailored solutions built specifically for your needs. Custom plugins, specialized forms, 
+                        and advanced workflow upgrades that integrate seamlessly.
+                    </p>
+                    <ul class="encore-service-features">
+                        <li>Custom plugin development</li>
+                        <li>Specialized form creation</li>
+                        <li>Advanced workflow upgrades</li>
+                        <li>Seamless system integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="encore-why-choose" class="encore-why-choose">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h2 class="encore-section-title">Why Choose Digital Encore</h2>
+                <p class="encore-section-description">
+                    We don't just build websites – we create digital ecosystems that drive your business forward
+                </p>
+            </div>
+            
+            <div class="encore-benefits-grid">
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">Professional Image</h3>
+                    <p class="encore-benefit-description">
+                        Present your business with confidence through our expertly crafted digital presence
+                    </p>
+                </div>
+
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">Efficiency</h3>
+                    <p class="encore-benefit-description">
+                        Free your team from manual work with intelligent automation that handles the details
+                    </p>
+                </div>
+
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">Customer-First</h3>
+                    <p class="encore-benefit-description">
+                        Smarter tools that improve service quality and customer satisfaction
+                    </p>
+                </div>
+
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">Scalability</h3>
+                    <p class="encore-benefit-description">
+                        Solutions that grow with your business and adapt to your evolving needs
+                    </p>
+                </div>
+
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">Innovation</h3>
+                    <p class="encore-benefit-description">
+                        Future-ready systems powered by cutting-edge intelligent automation
+                    </p>
+                </div>
+
+                <div class="encore-benefit-item">
+                    <div class="encore-benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="encore-benefit-title">24/7 Digital Office</h3>
+                    <p class="encore-benefit-description">
+                        Your website becomes your digital office, open around the clock for customers
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="encore-contact" class="encore-contact">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h2 class="encore-section-title">Get Your Free Consultation</h2>
+                <p class="encore-section-description">
+                    Ready to transform your business? Let's discuss how we can help you achieve your goals
+                </p>
+            </div>
+            
+            <div class="encore-contact-content">
+                <div class="encore-contact-info">
+                    <h3 class="encore-contact-title">Let's Start Your Digital Transformation</h3>
+                    <p class="encore-contact-description">
+                        Our team is ready to help you build a professional online presence and automate your business processes. 
+                        Get a free consultation to discover how we can elevate your business.
+                    </p>
+                    
+                    <div class="encore-contact-details">
+                        <div class="encore-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>vanjerson2@gmail.com</span>
+                        </div>
+                        <div class="encore-contact-item">
+                            <i class="fab fa-facebook"></i>
+                            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer">
+                                Follow us on Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="encore-contact-form" id="encoreContactForm">
+                    <div class="encore-form-group">
+                        <input type="text" id="encoreFirstName" name="firstName" class="encore-form-input" placeholder="First Name">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="text" id="encoreLastName" name="lastName" class="encore-form-input" placeholder="Last Name">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="email" id="encoreEmail" name="email" class="encore-form-input" placeholder="Email Address">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="tel" id="encorePhone" name="phone" class="encore-form-input" placeholder="Phone Number">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <textarea id="encoreMessage" name="message" class="encore-form-textarea" placeholder="Tell us about your project or business needs" rows="5"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="encore-btn encore-btn-primary encore-btn-full">
+                        <span class="encore-btn-text">Send Message</span>
+                        <i class="fas fa-paper-plane encore-btn-icon"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="encore-footer">
+        <div class="encore-container">
+            <div class="encore-footer-content">
+                <div class="encore-footer-brand">
+                    <a href="index.html" class="encore-logo encore-footer-logo">
+                        <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img">
+                    </a>
+                    <p class="encore-footer-description">
+                        Your all-in-one partner for professional web development and automation solutions. 
+                        Smarter websites, intelligent systems, better customer experiences.
+                    </p>
+                </div>
+                
+                <div class="encore-footer-links">
+                    <div class="encore-footer-section">
+                        <h4 class="encore-footer-title">Services</h4>
+                        <ul class="encore-footer-list">
+                            <li><a href="services.html" class="encore-footer-link">Website Solutions</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Business Automation</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Customer Experience</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Custom Features</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="encore-footer-section">
+                        <h4 class="encore-footer-title">Company</h4>
+                        <ul class="encore-footer-list">
+                            <li><a href="index.html" class="encore-footer-link">About Us</a></li>
+                            <li><a href="why-choose-us.html" class="encore-footer-link">Why Choose Us</a></li>
+                            <li><a href="contact.html" class="encore-footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="encore-footer-bottom">
+                <p class="encore-footer-copyright">
+                    &copy; 2025 Digital Encore. All rights reserved.
+                </p>
+                <div class="encore-footer-social">
+                    <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-social-link">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alert Container -->
+    <div class="encore-alert-container" id="encoreAlertContainer"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

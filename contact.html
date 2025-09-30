@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Digital Encore</title>
+    <meta name="description" content="Get in touch with Digital Encore for your web development and automation needs. Free consultation available. Contact us today!">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="encore-header">
+        <nav class="encore-nav">
+            <div class="encore-nav-container">
+                <a href="index.html" class="encore-logo">
+                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img">
+                </a>
+                
+                <div class="encore-nav-menu" id="encoreNavMenu">
+                    <a href="index.html" class="encore-nav-link">Home</a>
+                    <a href="services.html" class="encore-nav-link">Services</a>
+                    <a href="why-choose-us.html" class="encore-nav-link">Why Choose Us</a>
+                    <a href="contact.html" class="encore-nav-link encore-nav-link-active">Contact</a>
+                </div>
+                
+                <div class="encore-nav-controls">
+                    <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon encore-theme-icon"></i>
+                    </button>
+                    <button class="encore-mobile-toggle" id="encoreMobileToggle" aria-label="Toggle mobile menu">
+                        <span class="encore-hamburger"></span>
+                        <span class="encore-hamburger"></span>
+                        <span class="encore-hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Hero Section -->
+    <section class="encore-contact-hero">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h1 class="encore-section-title">Get Your Free Consultation</h1>
+                <p class="encore-section-description">
+                    Ready to transform your business? Let's discuss how we can help you achieve your goals
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="encore-contact">
+        <div class="encore-container">
+            <div class="encore-contact-content">
+                <div class="encore-contact-info">
+                    <h3 class="encore-contact-title">Let's Start Your Digital Transformation</h3>
+                    <p class="encore-contact-description">
+                        Our team is ready to help you build a professional online presence and automate your business processes. 
+                        Get a free consultation to discover how we can elevate your business.
+                    </p>
+                    
+                    <div class="encore-contact-details">
+                        <div class="encore-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>vanjerson2@gmail.com</span>
+                        </div>
+                        <div class="encore-contact-item">
+                            <i class="fab fa-facebook"></i>
+                            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer">
+                                Follow us on Facebook
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="encore-contact-benefits">
+                        <h4 class="encore-contact-benefits-title">What You'll Get:</h4>
+                        <ul class="encore-contact-benefits-list">
+                            <li><i class="fas fa-check"></i> Free consultation and project assessment</li>
+                            <li><i class="fas fa-check"></i> Customized solution recommendations</li>
+                            <li><i class="fas fa-check"></i> Transparent pricing and timeline</li>
+                            <li><i class="fas fa-check"></i> No obligation to proceed</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <form class="encore-contact-form" id="encoreContactForm">
+                    <div class="encore-form-group">
+                        <input type="text" id="encoreFirstName" name="firstName" class="encore-form-input" placeholder="First Name">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="text" id="encoreLastName" name="lastName" class="encore-form-input" placeholder="Last Name">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="email" id="encoreEmail" name="email" class="encore-form-input" placeholder="Email Address">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <input type="tel" id="encorePhone" name="phone" class="encore-form-input" placeholder="Phone Number">
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <textarea id="encoreMessage" name="message" class="encore-form-textarea" placeholder="Tell us about your project or business needs" rows="5"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="encore-btn encore-btn-primary encore-btn-full">
+                        <span class="encore-btn-text">Send Message</span>
+                        <i class="fas fa-paper-plane encore-btn-icon"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="encore-faq">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h2 class="encore-section-title">Frequently Asked Questions</h2>
+                <p class="encore-section-description">
+                    Common questions about our services and process
+                </p>
+            </div>
+            
+            <div class="encore-faq-grid">
+                <div class="encore-faq-item">
+                    <h3 class="encore-faq-question">How long does a typical project take?</h3>
+                    <p class="encore-faq-answer">
+                        Project timelines vary depending on complexity. Simple websites typically take 2-4 weeks, while complex automation systems may take 6-12 weeks. We provide detailed timelines during consultation.
+                    </p>
+                </div>
+                
+                <div class="encore-faq-item">
+                    <h3 class="encore-faq-question">Do you provide ongoing support?</h3>
+                    <p class="encore-faq-answer">
+                        Yes! We offer comprehensive support packages including maintenance, updates, and technical assistance to ensure your systems continue running smoothly.
+                    </p>
+                </div>
+                
+                <div class="encore-faq-item">
+                    <h3 class="encore-faq-question">What's included in the free consultation?</h3>
+                    <p class="encore-faq-answer">
+                        Our free consultation includes a thorough assessment of your current setup, identification of improvement opportunities, and customized recommendations for your business needs.
+                    </p>
+                </div>
+                
+                <div class="encore-faq-item">
+                    <h3 class="encore-faq-question">Can you work with existing systems?</h3>
+                    <p class="encore-faq-answer">
+                        Absolutely! We specialize in integrating with existing systems and can enhance your current setup without disrupting your operations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="encore-footer">
+        <div class="encore-container">
+            <div class="encore-footer-content">
+                <div class="encore-footer-brand">
+                    <a href="index.html" class="encore-logo encore-footer-logo">
+                        <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img">
+                    </a>
+                    <p class="encore-footer-description">
+                        Your all-in-one partner for professional web development and automation solutions. 
+                        Smarter websites, intelligent systems, better customer experiences.
+                    </p>
+                </div>
+                
+                <div class="encore-footer-links">
+                    <div class="encore-footer-section">
+                        <h4 class="encore-footer-title">Services</h4>
+                        <ul class="encore-footer-list">
+                            <li><a href="services.html" class="encore-footer-link">Website Solutions</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Business Automation</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Customer Experience</a></li>
+                            <li><a href="services.html" class="encore-footer-link">Custom Features</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="encore-footer-section">
+                        <h4 class="encore-footer-title">Company</h4>
+                        <ul class="encore-footer-list">
+                            <li><a href="index.html" class="encore-footer-link">About Us</a></li>
+                            <li><a href="why-choose-us.html" class="encore-footer-link">Why Choose Us</a></li>
+                            <li><a href="contact.html" class="encore-footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="encore-footer-bottom">
+                <p class="encore-footer-copyright">
+                    &copy; 2025 Digital Encore. All rights reserved.
+                </p>
+                <div class="encore-footer-social">
+                    <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-social-link">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alert Container -->
+    <div class="encore-alert-container" id="encoreAlertContainer"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
