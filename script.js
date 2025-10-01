@@ -208,12 +208,13 @@ function validateForm() {
         isValid = false;
     }
     
-    // Phone validation (basic)
+    // Phone validation (flexible for international numbers)
     const phoneValue = phone.value.trim();
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    if (phoneValue && !phoneRegex.test(phoneValue.replace(/[\s\-\(\)]/g, ''))) {
+    // Accepts: +63, 63, 09xx, 9xx, +1, 1, etc. with 7-15 digits total
+    const phoneRegex = /^[\+]?[0-9][\d\s\-\(\)]{6,20}$/;
+    if (phoneValue && !phoneRegex.test(phoneValue)) {
         phone.classList.add('encore-form-error');
-        showAlert('Please enter a valid phone number.', 'error');
+        showAlert('Please enter a valid phone number (e.g., +63 912 345 6789, 0912 345 6789, or 912 345 6789).', 'error');
         isValid = false;
     }
     
