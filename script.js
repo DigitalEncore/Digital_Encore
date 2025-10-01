@@ -152,8 +152,8 @@ function initializeContactForm() {
             );
             
             if (response.status === 200) {
-                showAlert('Message sent successfully! We\'ll get back to you soon.', 'success');
-                form.reset();
+                // Redirect to thank you page
+                window.location.href = 'thank-you.html';
             } else {
                 throw new Error('Failed to send message');
             }
