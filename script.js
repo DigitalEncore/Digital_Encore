@@ -184,6 +184,16 @@ function initializeContactForm() {
             }
             
             if (emailResponse.status === 200) {
+                // Track form submission conversion
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'Contact Form Submission',
+                        content_category: 'Form',
+                        value: 1,
+                        currency: 'USD'
+                    });
+                }
+                
                 // Redirect to thank you page
                 window.location.href = 'thank-you.html';
             } else {
