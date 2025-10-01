@@ -114,6 +114,13 @@ function updateActiveNavigation() {
 // ========================================
 
 function initializeContactForm() {
+    // Wait for EmailJS to be available
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS not loaded yet, retrying...');
+        setTimeout(initializeContactForm, 100);
+        return;
+    }
+    
     // Initialize EmailJS
     emailjs.init('b3HVcRXicSj4JkoTl');
     
@@ -134,24 +141,49 @@ function initializeContactForm() {
         setButtonLoading(submitBtn, btnText, btnIcon, true);
         
         try {
-            // Get form data
+            // Get form data (matching EmailJS template field names)
             const formData = {
-                firstName: document.getElementById('encoreFirstName').value.trim(),
-                lastName: document.getElementById('encoreLastName').value.trim(),
+                first_name: document.getElementById('encoreFirstName').value.trim(),
+                last_name: document.getElementById('encoreLastName').value.trim(),
                 email: document.getElementById('encoreEmail').value.trim(),
                 phone: document.getElementById('encorePhone').value.trim(),
                 message: document.getElementById('encoreMessage').value.trim(),
                 timestamp: new Date().toLocaleString()
             };
             
+            // Add optional fields if they exist
+            const country = document.getElementById('encoreCountry');
+            const service = document.getElementById('encoreService');
+            
+            if (country && country.value) {
+                formData.country = country.value;
+            } else {
+                formData.country = 'Not specified';
+            }
+            
+            if (service && service.value) {
+                formData.service = service.value;
+            } else {
+                formData.service = 'Not specified';
+            }
+            
             // Send email
-            const response = await emailjs.send(
+            const emailResponse = await emailjs.send(
                 'service_lzcfyrv',
                 'template_ruvnjn8',
                 formData
             );
             
-            if (response.status === 200) {
+            // Also save to Google Sheets (optional - won't block if it fails)
+            try {
+                console.log('Sending to Google Sheets:', formData);
+                await saveToGoogleSheets(formData);
+                console.log('Google Sheets save successful');
+            } catch (sheetsError) {
+                console.log('Google Sheets save failed (non-critical):', sheetsError);
+            }
+            
+            if (emailResponse.status === 200) {
                 // Redirect to thank you page
                 window.location.href = 'thank-you.html';
             } else {
@@ -182,6 +214,18 @@ function validateForm() {
         { element: phone, name: 'Phone Number' },
         { element: message, name: 'Message' }
     ];
+    
+    // Check for optional fields
+    const country = document.getElementById('encoreCountry');
+    const service = document.getElementById('encoreService');
+    
+    if (country) {
+        fields.push({ element: country, name: 'Country' });
+    }
+    
+    if (service) {
+        fields.push({ element: service, name: 'Service Interest' });
+    }
     
     let isValid = true;
     const missingFields = [];
@@ -237,6 +281,32 @@ function setButtonLoading(button, textElement, iconElement, isLoading) {
         textElement.textContent = 'Send Message';
         iconElement.className = 'fas fa-paper-plane encore-btn-icon';
         button.classList.remove('encore-btn-loading');
+    }
+}
+
+// ========================================
+// GOOGLE SHEETS INTEGRATION
+// ========================================
+
+async function saveToGoogleSheets(formData) {
+    // Google Apps Script Web App URL
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxVGZVgtyD5046yV514p1L1YTNblDI8C4gyJXrXYDcfOWtET6b2Khyw83bWHkDWc12iOQ/exec';
+    
+    try {
+        const response = await fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Required for Google Apps Script
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        console.log('Data saved to Google Sheets successfully');
+        return response;
+    } catch (error) {
+        console.error('Google Sheets save error:', error);
+        throw error;
     }
 }
 

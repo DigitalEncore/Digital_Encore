@@ -19,9 +19,6 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -39,6 +36,7 @@
                     <a href="services.html" class="encore-nav-link">Services</a>
                     <a href="why-choose-us.html" class="encore-nav-link">Why Choose Us</a>
                     <a href="contact.html" class="encore-nav-link">Contact</a>
+                    <a href="get-started.html" class="encore-nav-link encore-nav-cta">Get Started</a>
                 </div>
                 
                 <div class="encore-nav-controls">
@@ -61,7 +59,7 @@
             <div class="encore-hero-content">
                 <h1 class="encore-hero-title">
                     <span class="encore-hero-highlight">Smarter websites.</span>
-                    <span class="encore-hero-highlight">Intelligent systems.</span>
+                    <span class="encore-hero-highlight intelligent-systems">Intelligent systems.</span>
                     <span class="encore-hero-highlight">Better customer experiences.</span>
                 </h1>
                 <p class="encore-hero-description">
@@ -318,6 +316,79 @@
                     </div>
                     
                     <div class="encore-form-group">
+                        <select id="encoreCountry" name="country" class="encore-form-input">
+                            <option value="">Select Country</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="United States">United States</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Japan">Japan</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Finland">Finland</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="India">India</option>
+                            <option value="China">China</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Peru">Peru</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Israel">Israel</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="encore-form-group">
+                        <select id="encoreService" name="service" class="encore-form-input">
+                            <option value="">Select Service Interest</option>
+                            <option value="website-solutions">Website Solutions</option>
+                            <option value="business-automation">Business System Automation</option>
+                            <option value="customer-experience">Customer Experience Solutions</option>
+                            <option value="custom-features">Custom Features & Enhancements</option>
+                            <option value="multiple-services">Multiple Services</option>
+                            <option value="not-sure">Not Sure Yet</option>
+                        </select>
+                    </div>
+                    
+                    <div class="encore-form-group">
                         <textarea id="encoreMessage" name="message" class="encore-form-textarea" placeholder="Tell us about your project or business needs" rows="5"></textarea>
                     </div>
                     
@@ -361,6 +432,7 @@
                             <li><a href="index.html" class="encore-footer-link">About Us</a></li>
                             <li><a href="why-choose-us.html" class="encore-footer-link">Why Choose Us</a></li>
                             <li><a href="contact.html" class="encore-footer-link">Contact</a></li>
+                            <li><a href="get-started.html" class="encore-footer-link">Get Started</a></li>
                         </ul>
                     </div>
                 </div>
@@ -382,6 +454,9 @@
     <!-- Alert Container -->
     <div class="encore-alert-container" id="encoreAlertContainer"></div>
 
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>
