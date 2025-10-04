@@ -76,6 +76,7 @@
 
     <!-- Get Started Hero Section -->
     <section class="encore-get-started-hero">
+        <div class="encore-floating-shape"></div>
         <div class="encore-container">
             <div class="encore-get-started-hero-content">
                 <div class="encore-get-started-text">
@@ -86,6 +87,12 @@
                         Let's discuss your project and create a custom solution that drives results. 
                         Fill out the form and we'll get back to you within 24 hours.
                     </p>
+                    
+                    <div class="encore-get-started-cta">
+                        <p class="encore-get-started-cta-text">
+                            <strong>Fill out the form for your free consultation</strong> and let's get started on transforming your business today!
+                        </p>
+                    </div>
                     
                     <div class="encore-get-started-benefits">
                         <h3 class="encore-get-started-benefits-title">What You'll Get:</h3>
@@ -219,7 +226,9 @@
             <div class="encore-benefits-grid">
                 <div class="encore-benefit-item">
                     <div class="encore-benefit-icon">
-                        <i class="fas fa-rocket"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-benefit-title">Fast Results</h3>
                     <p class="encore-benefit-description">
@@ -229,7 +238,9 @@
 
                 <div class="encore-benefit-item">
                     <div class="encore-benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-benefit-title">Risk-Free Start</h3>
                     <p class="encore-benefit-description">
@@ -239,7 +250,9 @@
 
                 <div class="encore-benefit-item">
                     <div class="encore-benefit-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-benefit-title">Proven Results</h3>
                     <p class="encore-benefit-description">
@@ -264,7 +277,9 @@
             <div class="encore-contact-methods">
                 <div class="encore-contact-method">
                     <div class="encore-contact-method-icon">
-                        <i class="fas fa-calendar-alt"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-contact-method-title">Book a Call</h3>
                     <p class="encore-contact-method-description">
@@ -277,7 +292,9 @@
                 
                 <div class="encore-contact-method">
                     <div class="encore-contact-method-icon">
-                        <i class="fas fa-envelope"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-contact-method-title">Send Email</h3>
                     <p class="encore-contact-method-description">
@@ -290,7 +307,9 @@
                 
                 <div class="encore-contact-method">
                     <div class="encore-contact-method-icon">
-                        <i class="fab fa-facebook"></i>
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
                     </div>
                     <h3 class="encore-contact-method-title">Facebook Message</h3>
                     <p class="encore-contact-method-description">
@@ -360,6 +379,74 @@
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
+    <!-- Chat Widget -->
+    <div id="encore-chat-widget" class="encore-chat-widget">
+        <div class="encore-chat-popup" id="encore-chat-popup">
+            <div class="encore-chat-popup-content">
+                <div class="encore-chat-popup-arrow"></div>
+                <div class="encore-chat-popup-text">
+                    <strong>Need help?</strong> Get instant answers about our services!
+                </div>
+                <button class="encore-chat-popup-close" id="encore-chat-popup-close">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="encore-chat-toggle" id="encore-chat-toggle">
+            <svg class="encore-chat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span class="encore-chat-badge" id="encore-chat-badge">1</span>
+        </div>
+        
+        <div class="encore-chat-window" id="encore-chat-window">
+            <div class="encore-chat-header">
+                <div class="encore-chat-header-info">
+                    <h3>Digital Encore Support</h3>
+                    <p>We're here to help!</p>
+                </div>
+                <button class="encore-chat-close" id="encore-chat-close">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="encore-chat-messages" id="encore-chat-messages">
+                <div class="encore-chat-message encore-chat-message-bot">
+                    <div class="encore-chat-avatar">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="encore-chat-bubble">
+                        <p>Hello! 👋 Welcome to Digital Encore! I'm here to help you with any questions about our services. How can I assist you today?</p>
+                        <span class="encore-chat-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="encore-chat-quick-replies">
+                <button class="encore-chat-quick-reply" data-message="What services do you offer?">Our Services</button>
+                <button class="encore-chat-quick-reply" data-message="How much does a website cost?">Pricing</button>
+                <button class="encore-chat-quick-reply" data-message="How long does a project take?">Timeline</button>
+                <button class="encore-chat-quick-reply" data-message="I want a free consultation">Free Consultation</button>
+            </div>
+            
+            <div class="encore-chat-input-container">
+                <input type="text" class="encore-chat-input" id="encore-chat-input" placeholder="Type your message...">
+                <button class="encore-chat-send" id="encore-chat-send">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>

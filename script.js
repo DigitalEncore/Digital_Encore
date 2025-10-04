@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeAnimations();
     initializeSmoothScrolling();
+    initializeAccordion();
+    initializeChatWidget();
 });
 
 // ========================================
@@ -381,6 +383,11 @@ function initializeAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Don't add animation to encore-hero-visual on mobile devices
+                if (entry.target.classList.contains('encore-hero-visual') && window.innerWidth <= 767) {
+                    observer.unobserve(entry.target);
+                    return;
+                }
                 entry.target.classList.add('encore-animate-fade-in-up');
                 observer.unobserve(entry.target);
             }
@@ -389,7 +396,7 @@ function initializeAnimations() {
     
     // Observe elements for animation
     const animateElements = document.querySelectorAll(
-        '.encore-service-card, .encore-benefit-item, .encore-hero-content, .encore-hero-visual'
+        '.encore-service-card, .encore-benefit-item, .encore-hero-content, .encore-hero-visual, .encore-section-header, .encore-get-started-hero-content, .encore-thank-you-content'
     );
     
     animateElements.forEach(el => {
@@ -401,6 +408,11 @@ function initializeAnimations() {
 }
 
 function handleParallax() {
+    // Disable parallax effect on mobile devices (screen width <= 767px)
+    if (window.innerWidth <= 767) {
+        return;
+    }
+    
     const scrolled = window.pageYOffset;
     const heroCard = document.querySelector('.encore-hero-card');
     
@@ -599,6 +611,319 @@ function copyToClipboard(text) {
 }
 
 // ========================================
+// ACCORDION FUNCTIONALITY
+// ========================================
+
+function initializeAccordion() {
+    const accordionItems = document.querySelectorAll('.encore-accordion-item');
+    
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.encore-accordion-header');
+        const content = item.querySelector('.encore-accordion-content');
+        const icon = header.querySelector('.encore-accordion-icon');
+        
+        if (!header || !content) return;
+        
+        header.addEventListener('click', function() {
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other accordion items
+            accordionItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherHeader = otherItem.querySelector('.encore-accordion-header');
+                    const otherContent = otherItem.querySelector('.encore-accordion-content');
+                    const otherIcon = otherHeader.querySelector('.encore-accordion-icon');
+                    
+                    otherHeader.setAttribute('aria-expanded', 'false');
+                    otherContent.classList.remove('open');
+                    otherItem.classList.remove('active');
+                    if (otherIcon) {
+                        otherIcon.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+            
+            // Toggle current item
+            if (isExpanded) {
+                header.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                item.classList.remove('active');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            } else {
+                header.setAttribute('aria-expanded', 'true');
+                content.classList.add('open');
+                item.classList.add('active');
+                if (icon) {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+        });
+        
+        // Keyboard navigation
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+    });
+}
+
+// ========================================
+// CHAT WIDGET FUNCTIONALITY
+// ========================================
+
+function initializeChatWidget() {
+    const chatToggle = document.getElementById('encore-chat-toggle');
+    const chatWindow = document.getElementById('encore-chat-window');
+    const chatClose = document.getElementById('encore-chat-close');
+    const chatInput = document.getElementById('encore-chat-input');
+    const chatSend = document.getElementById('encore-chat-send');
+    const chatMessages = document.getElementById('encore-chat-messages');
+    const chatBadge = document.getElementById('encore-chat-badge');
+    const quickReplies = document.querySelectorAll('.encore-chat-quick-reply');
+    const chatPopup = document.getElementById('encore-chat-popup');
+    const chatPopupClose = document.getElementById('encore-chat-popup-close');
+    
+    if (!chatToggle || !chatWindow) return;
+    
+    let isOpen = false;
+    let messageCount = 0;
+    
+    // Chat responses database
+    const responses = {
+        'what services do you offer?': 'We offer comprehensive website solutions, business automation, customer experience optimization, and custom features. Our services include modern web development, process automation, and digital transformation solutions.',
+        'how much does a website cost?': 'Our website pricing varies based on complexity and requirements. Simple websites start from ₱15,000, while complex business solutions can range from ₱50,000 to ₱200,000+. We offer free consultations to provide accurate quotes.',
+        'how long does a project take?': 'Project timelines depend on complexity. Simple websites typically take 2-4 weeks, while complex automation systems may take 6-12 weeks. We provide detailed timelines during our free consultation.',
+        'i want a free consultation': 'Great! I\'d be happy to help you get started. You can contact us directly at vanjerson2@gmail.com or visit our contact page to schedule your free consultation. We\'ll assess your needs and provide customized recommendations.',
+        'pricing': 'Our pricing is competitive and varies based on project scope. We offer flexible payment plans and always provide transparent quotes. Contact us for a detailed pricing discussion tailored to your specific needs.',
+        'timeline': 'Project timelines are customized based on your requirements. We provide realistic timelines during consultation and keep you updated throughout the development process.',
+        'contact': 'You can reach us at vanjerson2@gmail.com or through our contact form. We typically respond within 24 hours and offer free consultations to discuss your project needs.',
+        'default': 'Thank you for your message! I\'m here to help with any questions about our services. For detailed information, please contact us at vanjerson2@gmail.com or schedule a free consultation.'
+    };
+    
+    // Toggle chat window
+    chatToggle.addEventListener('click', function() {
+        isOpen = !isOpen;
+        if (isOpen) {
+            chatWindow.classList.add('open');
+            chatBadge.style.display = 'none';
+            chatInput.focus();
+        } else {
+            chatWindow.classList.remove('open');
+        }
+    });
+    
+    // Close chat window
+    chatClose.addEventListener('click', function() {
+        isOpen = false;
+        chatWindow.classList.remove('open');
+    });
+    
+    // Send message function
+    function sendMessage(message) {
+        if (!message.trim()) return;
+        
+        // Add user message
+        addMessage(message, 'user');
+        
+        // Simulate typing delay with typing indicator
+        setTimeout(() => {
+            showTypingIndicator();
+        }, 500);
+        
+        setTimeout(() => {
+            hideTypingIndicator();
+            const response = getResponse(message.toLowerCase());
+            addMessage(response, 'bot');
+        }, 1500);
+        
+        // Clear input
+        chatInput.value = '';
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'encore-chat-message encore-chat-message-bot encore-typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="encore-chat-avatar">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+            <div class="encore-chat-bubble encore-typing-bubble">
+                <div class="encore-typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Hide typing indicator
+    function hideTypingIndicator() {
+        const typingIndicator = chatMessages.querySelector('.encore-typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `encore-chat-message encore-chat-message-${sender}`;
+        
+        const avatar = document.createElement('div');
+        avatar.className = 'encore-chat-avatar';
+        
+        if (sender === 'bot') {
+            avatar.innerHTML = `
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            `;
+        } else {
+            avatar.innerHTML = `
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            `;
+        }
+        
+        const bubble = document.createElement('div');
+        bubble.className = 'encore-chat-bubble';
+        
+        // Add Get Started button for bot messages
+        const getStartedButton = sender === 'bot' ? 
+            `<div class="encore-chat-action-buttons">
+                <button class="encore-chat-get-started-btn" onclick="window.location.href='get-started.html'">
+                    Get Started
+                </button>
+            </div>` : '';
+        
+        bubble.innerHTML = `
+            <p>${text}</p>
+            ${getStartedButton}
+            <span class="encore-chat-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+        `;
+        
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(bubble);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        messageCount++;
+    }
+    
+    // Get appropriate response
+    function getResponse(message) {
+        // Check for exact matches first
+        for (const [key, response] of Object.entries(responses)) {
+            if (message.includes(key)) {
+                return response;
+            }
+        }
+        
+        // Check for keywords
+        if (message.includes('service') || message.includes('offer')) {
+            return responses['what services do you offer?'];
+        } else if (message.includes('price') || message.includes('cost') || message.includes('expensive')) {
+            return responses['how much does a website cost?'];
+        } else if (message.includes('time') || message.includes('long') || message.includes('duration')) {
+            return responses['how long does a project take?'];
+        } else if (message.includes('contact') || message.includes('email') || message.includes('reach')) {
+            return responses['contact'];
+        } else if (message.includes('consultation') || message.includes('free') || message.includes('meeting')) {
+            return responses['i want a free consultation'];
+        }
+        
+        return responses['default'];
+    }
+    
+    // Send button click
+    chatSend.addEventListener('click', function() {
+        const message = chatInput.value.trim();
+        sendMessage(message);
+    });
+    
+    // Enter key to send
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const message = chatInput.value.trim();
+            sendMessage(message);
+        }
+    });
+    
+    // Quick reply buttons
+    quickReplies.forEach(button => {
+        button.addEventListener('click', function() {
+            const message = this.getAttribute('data-message');
+            sendMessage(message);
+        });
+    });
+    
+    // Show popup after 2 seconds
+    setTimeout(() => {
+        if (!isOpen && chatPopup) {
+            chatPopup.classList.add('show');
+        }
+    }, 2000);
+    
+    // Show badge after 3 seconds
+    setTimeout(() => {
+        if (!isOpen) {
+            chatBadge.style.display = 'flex';
+        }
+    }, 3000);
+    
+    // Add attention-grabbing animation after 5 seconds
+    setTimeout(() => {
+        if (!isOpen) {
+            chatToggle.style.animation = 'encore-chat-nudge 3s ease-in-out infinite, encore-chat-attention 2s ease-in-out 3';
+        }
+    }, 5000);
+    
+    // Close popup when close button is clicked
+    if (chatPopupClose) {
+        chatPopupClose.addEventListener('click', function() {
+            if (chatPopup) {
+                chatPopup.classList.remove('show');
+            }
+        });
+    }
+    
+    // Close popup when chat is opened
+    chatToggle.addEventListener('click', function() {
+        if (isOpen && chatPopup) {
+            chatPopup.classList.remove('show');
+        }
+    });
+    
+    // Click popup to open chat
+    if (chatPopup) {
+        chatPopup.addEventListener('click', function(e) {
+            if (e.target.closest('.encore-chat-popup-close')) return;
+            chatToggle.click();
+        });
+    }
+    
+    // Hide badge when chat is opened
+    chatToggle.addEventListener('click', function() {
+        if (isOpen) {
+            chatBadge.style.display = 'none';
+        }
+    });
+}
+
+// ========================================
 // EXPORT FOR TESTING (if needed)
 // ========================================
 
@@ -608,6 +933,8 @@ if (typeof module !== 'undefined' && module.exports) {
         showAlert,
         setTheme,
         formatPhoneNumber,
-        copyToClipboard
+        copyToClipboard,
+        initializeAccordion,
+        initializeChatWidget
     };
 }
