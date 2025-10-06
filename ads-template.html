@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Encore - Website Services Ad</title>
+    <meta name="description" content="Professional website design and development services by Digital Encore">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Files/Digital Encore.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1e293b;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+         .ads-container {
+             position: relative;
+             width: 100%;
+             max-width: 900px;
+             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+             border-radius: 20px;
+             padding: 50px;
+             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+             overflow: hidden;
+         }
+
+        /* Background Elements */
+        .bg-pattern-1 {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bg-pattern-2 {
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .bg-pattern-3 {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(236, 72, 153, 0.1), rgba(59, 130, 246, 0.1));
+            border-radius: 20px;
+            transform: rotate(45deg);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        .dot:nth-child(4) { animation-delay: 0.6s; }
+        .dot:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .main-headline {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+            line-height: 1.1;
+        }
+
+        .sub-headline {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        /* Package Section */
+        .package-section {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .package-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .package-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #f8fafc;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-item:hover::before {
+            left: 100%;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            gap: 20px;
+        }
+
+        .qr-cta-section {
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.05);
+        }
+
+        .scan-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        .email-text {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .email-link {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Illustration Section */
+        .illustration-section {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+         .workspace-illustration {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             gap: 30px;
+             margin-top: 30px;
+         }
+
+         .laptop {
+             width: 350px;
+             height: 210px;
+             background: linear-gradient(135deg, #374151, #4b5563);
+             border-radius: 25px;
+             position: relative;
+             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+         }
+
+         .laptop-screen {
+             width: 340px;
+             height: 200px;
+             background: linear-gradient(135deg, #1e293b, #334155);
+             border-radius: 12px;
+             position: absolute;
+             top: 5px;
+             left: 5px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             overflow: hidden;
+         }
+
+         .code-lines {
+             display: flex;
+             flex-direction: column;
+             gap: 5px;
+             color: #10b981;
+             font-family: 'Courier New', monospace;
+             font-size: 13px;
+             width: 100%;
+             height: 100%;
+             padding: 15px;
+             overflow-y: auto;
+             overflow-x: hidden;
+             scroll-behavior: smooth;
+             /* Hide scrollbar */
+             scrollbar-width: none; /* Firefox */
+             -ms-overflow-style: none; /* IE and Edge */
+         }
+
+         .code-lines::-webkit-scrollbar {
+             display: none; /* Chrome, Safari, Opera */
+         }
+
+         .typing-line {
+             display: flex;
+             align-items: center;
+             min-height: 18px;
+         }
+
+         .typing-cursor {
+             display: inline-block;
+             width: 2px;
+             height: 10px;
+             background-color: #10b981;
+             animation: blink 1s infinite;
+             margin-left: 2px;
+         }
+
+         @keyframes blink {
+             0%, 50% { opacity: 1; }
+             51%, 100% { opacity: 0; }
+         }
+
+         .typing-text {
+             color: #10b981;
+             opacity: 0;
+         }
+
+         .typing-text.visible {
+             opacity: 1;
+         }
+
+         .typing-text.typing {
+             border-right: 2px solid #10b981;
+             animation: typing 2s steps(20) infinite, blink 1s infinite;
+         }
+
+         @keyframes typing {
+             0% { width: 0; }
+             50% { width: 100%; }
+             100% { width: 0; }
+         }
+
+         .tech-items {
+             display: flex;
+             flex-direction: column;
+             gap: 20px;
+         }
+
+         .tech-item {
+             width: 50px;
+             height: 50px;
+             background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+             border-radius: 10px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             color: white;
+             font-size: 20px;
+             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+             animation: float 3s ease-in-out infinite;
+         }
+
+        .tech-item:nth-child(2) { animation-delay: 0.5s; }
+        .tech-item:nth-child(3) { animation-delay: 1s; }
+
+         /* Mobile Responsive */
+         @media (max-width: 768px) {
+             .ads-container {
+                 padding: 40px 25px;
+                 margin: 10px;
+                 max-width: 95%;
+             }
+
+            .main-headline {
+                font-size: 2.5rem;
+            }
+
+            .sub-headline {
+                font-size: 1.1rem;
+            }
+
+            .package-features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-section {
+                gap: 15px;
+            }
+
+            .qr-code {
+                width: 100px;
+                height: 100px;
+            }
+
+            .scan-text {
+                font-size: 1rem;
+            }
+
+            .email-text {
+                font-size: 0.8rem;
+            }
+
+             .workspace-illustration {
+                 flex-direction: column;
+                 gap: 20px;
+             }
+
+             .laptop {
+                 width: 280px;
+                 height: 170px;
+             }
+
+             .laptop-screen {
+                 width: 270px;
+                 height: 160px;
+             }
+
+             .code-lines {
+                 font-size: 11px;
+                 padding: 12px;
+                 gap: 4px;
+             }
+
+             .typing-line {
+                 min-height: 16px;
+             }
+
+             .tech-item {
+                 width: 45px;
+                 height: 45px;
+                 font-size: 18px;
+             }
+        }
+
+        @media (max-width: 480px) {
+            .main-headline {
+                font-size: 2rem;
+            }
+
+            .package-title {
+                font-size: 1.2rem;
+            }
+
+            .feature-item {
+                padding: 12px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ads-container">
+        <!-- Background Patterns -->
+        <div class="bg-pattern-1"></div>
+        <div class="bg-pattern-2"></div>
+        <div class="bg-pattern-3"></div>
+
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h1 class="main-headline">NEED A WEBSITE & AUTOMATED SYSTEMS?</h1>
+            <p class="sub-headline">WE OFFER PROFESSIONAL WEBSITE DESIGN, DEVELOPMENT & AUTOMATION SERVICES</p>
+            <p class="tagline">Transform your business with modern, intelligent digital solutions and seamless automated processes</p>
+        </div>
+
+        <!-- Package Section -->
+        <div class="package-section">
+            <h2 class="package-title">STARTUP PACKAGE INCLUDES:</h2>
+            <div class="package-features">
+                <div class="feature-item">
+                    <i class="fas fa-file-code"></i> 5-PAGE WEBSITE
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-envelope"></i> CONTACT FORMS
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search"></i> SEO OPTIMIZATION
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i> MOBILE RESPONSIVE WEBSITE
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i> BASIC AUTOMATION
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="qr-cta-section">
+                <img src="Files/digital_encore_qr_branded.png" alt="Digital Encore QR Code" class="qr-code">
+                <div class="scan-text">SCAN TO CONNECT</div>
+                <div class="email-text">or send us an email at <a href="mailto:vanjerson2@gmail.com" class="email-link">vanjerson2@gmail.com</a></div>
+            </div>
+        </div>
+
+        <!-- Illustration Section -->
+        <div class="illustration-section">
+            <div class="workspace-illustration">
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                </div>
+                
+                 <div class="laptop">
+                     <div class="laptop-screen">
+                         <div class="code-lines">
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 0s;">&lt;html&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 0.5s;">&nbsp;&nbsp;&lt;head&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 1s;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Digital Encore&lt;/title&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 1.5s;">&nbsp;&nbsp;&lt;/head&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 2s;">&nbsp;&nbsp;&lt;body&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 2.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Success!&lt;/h1&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                             <div class="typing-line">
+                                 <span class="typing-text" style="animation-delay: 3s;">&nbsp;&nbsp;&lt;/body&gt;</span>
+                                 <span class="typing-cursor"></span>
+                             </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 3.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;script&gt;</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 4s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Digital Encore Automation</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 4.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function automateProcess() {</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('Success!');</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 5.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 6s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// API Integration</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 6.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch('/api/data')</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 7s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(response =&gt; {</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 7.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return response.json();</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 8s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 8.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(data =&gt; {</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 9s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('API Success!');</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 9.5s;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 10s;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 10.5s;">&nbsp;&nbsp;&lt;/body&gt;</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                               <div class="typing-line">
+                                   <span class="typing-text" style="animation-delay: 11s;">&lt;/html&gt;</span>
+                                   <span class="typing-cursor"></span>
+                               </div>
+                         </div>
+                     </div>
+                 </div>
+                
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+     <script>
+         // Animated typing effect for laptop screen
+         document.addEventListener('DOMContentLoaded', function() {
+             const typingLines = document.querySelectorAll('.typing-text');
+             const cursors = document.querySelectorAll('.typing-cursor');
+             const codeContainer = document.querySelector('.code-lines');
+             let currentLine = 0;
+             let isTyping = false;
+             
+             // Hide all cursors initially
+             cursors.forEach(cursor => {
+                 cursor.style.display = 'none';
+             });
+             
+             function typeNextLine() {
+                 if (currentLine < typingLines.length) {
+                     const line = typingLines[currentLine];
+                     const cursor = cursors[currentLine];
+                     const text = line.getAttribute('data-original');
+                     
+                     // Show cursor for current line
+                     cursor.style.display = 'inline-block';
+                     
+                     // Hide cursor for previous line
+                     if (currentLine > 0) {
+                         cursors[currentLine - 1].style.display = 'none';
+                     }
+                     
+                     line.textContent = '';
+                     line.style.opacity = '1';
+                     isTyping = true;
+                     
+                    let i = 0;
+                    const typeInterval = setInterval(() => {
+                        if (i < text.length) {
+                            line.textContent += text.charAt(i);
+                            i++;
+                            
+                            // Auto-scroll during typing (every few characters)
+                            if (i % 3 === 0) {
+                                const lineElement = line.parentElement;
+                                const containerHeight = codeContainer.clientHeight;
+                                const lineTop = lineElement.offsetTop;
+                                const lineHeight = lineElement.offsetHeight;
+                                
+                                const currentScroll = codeContainer.scrollTop;
+                                const visibleBottom = currentScroll + containerHeight;
+                                
+                                if (lineTop + lineHeight > visibleBottom) {
+                                    codeContainer.scrollTop = lineTop - containerHeight + lineHeight + 20;
+                                }
+                            }
+                        } else {
+                            clearInterval(typeInterval);
+                            isTyping = false;
+                            
+                            currentLine++;
+                            
+                            // Wait a bit before typing next line
+                            setTimeout(typeNextLine, 500);
+                        }
+                    }, 100);
+                 } else {
+                     // Hide the last cursor
+                     cursors[cursors.length - 1].style.display = 'none';
+                     
+                     // Animation complete - keep all text visible
+                     setTimeout(() => {
+                         // Restart the animation after a longer delay
+                         currentLine = 0;
+                         // Hide all text again for restart and reset scroll
+                         typingLines.forEach(line => {
+                             line.textContent = '';
+                             line.style.opacity = '0';
+                         });
+                         // Reset scroll to top
+                         codeContainer.scrollTop = 0;
+                         typeNextLine();
+                     }, 3000);
+                 }
+             }
+             
+             // Store original text and hide all lines initially
+             typingLines.forEach(line => {
+                 line.setAttribute('data-original', line.textContent);
+                 line.textContent = '';
+                 line.style.opacity = '0';
+             });
+             
+             // Start the typing animation
+             setTimeout(typeNextLine, 1000);
+         });
+     </script>
+ </body>
+ </html>
