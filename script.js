@@ -694,14 +694,18 @@ function initializeChatWidget() {
     
     // Chat responses database
     const responses = {
-        'what services do you offer?': 'We offer comprehensive website solutions, business automation, customer experience optimization, and custom features. Our services include modern web development, process automation, and digital transformation solutions.',
-        'how much does a website cost?': 'Our website pricing varies based on complexity and requirements. Simple websites start from ₱15,000, while complex business solutions can range from ₱50,000 to ₱200,000+. We offer free consultations to provide accurate quotes.',
-        'how long does a project take?': 'Project timelines depend on complexity. Simple websites typically take 2-4 weeks, while complex automation systems may take 6-12 weeks. We provide detailed timelines during our free consultation.',
-        'i want a free consultation': 'Great! I\'d be happy to help you get started. You can contact us directly at vanjerson2@gmail.com or visit our contact page to schedule your free consultation. We\'ll assess your needs and provide customized recommendations.',
-        'pricing': 'Our pricing is competitive and varies based on project scope. We offer flexible payment plans and always provide transparent quotes. Contact us for a detailed pricing discussion tailored to your specific needs.',
-        'timeline': 'Project timelines are customized based on your requirements. We provide realistic timelines during consultation and keep you updated throughout the development process.',
+        'what services do you offer?': 'We offer comprehensive website solutions, business automation, customer experience optimization, and custom features. Our services include modern web development, process automation, and digital transformation solutions. What specific challenges are you looking to solve?',
+        'how much does a website cost?': 'Great question! Every project is unique, so pricing depends on your specific needs and goals. Rather than giving you a generic range, I\'d love to understand your requirements first. What type of website or solution are you looking for?',
+        'how long does a project take?': 'Project timelines vary based on complexity and scope. To give you an accurate timeline, I\'d need to understand your specific requirements. What kind of project are you planning?',
+        'i want a free consultation': 'Excellent! I\'d be happy to help you get started. You can contact us directly at vanjerson2@gmail.com or visit our contact page to schedule your free consultation. We\'ll assess your needs and provide customized recommendations.',
+        'pricing': 'I understand you\'re interested in pricing! Every project is different, so I\'d love to learn more about your specific needs first. What kind of solution are you looking for? This will help me provide you with accurate pricing information.',
+        'timeline': 'Project timelines are customized based on your requirements. To give you a realistic timeline, I\'d need to understand your project scope. What are you looking to build or improve?',
         'contact': 'You can reach us at vanjerson2@gmail.com or through our contact form. We typically respond within 24 hours and offer free consultations to discuss your project needs.',
-        'default': 'Thank you for your message! I\'m here to help with any questions about our services. For detailed information, please contact us at vanjerson2@gmail.com or schedule a free consultation.'
+        'budget': 'I appreciate you asking about budget! To provide you with the most accurate pricing, I\'d love to understand your project requirements first. What specific goals are you trying to achieve?',
+        'cost': 'Great question about cost! Every project is unique, so pricing varies based on your specific needs. What type of website or solution are you planning? This will help me give you more relevant information.',
+        'i need a website for my business': 'Excellent! A professional website can transform your business. To provide you with the best solution, I\'d love to learn more about your business. What industry are you in, and what are your main goals for the website?',
+        'i want to automate my business processes': 'Great choice! Automation can save you time and reduce errors. What specific processes are you looking to automate? Are you thinking about customer management, order processing, or something else?',
+        'default': 'Thank you for your message! I\'m here to help with any questions about our services. To provide you with the most relevant information, could you tell me more about what you\'re looking to achieve? You can also contact us at vanjerson2@gmail.com for a free consultation.'
     };
     
     // Toggle chat window
