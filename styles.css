@@ -1072,6 +1072,9 @@ body {
 @media (min-width: 1024px) {
   .encore-benefits-grid {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
@@ -3473,8 +3476,22 @@ body {
 }
 
 .encore-why-get-started {
-  padding: var(--encore-space-20) 0;
+  padding: var(--encore-space-16) 0 0 0;
   background: var(--encore-bg-primary);
+}
+
+.encore-why-get-started .encore-section-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.encore-why-get-started .encore-benefits-grid {
+  gap: var(--encore-space-2);
+  margin-top: 0;
+}
+
+.encore-why-get-started .encore-container {
+  padding-bottom: 0;
 }
 
 .encore-get-started-form {
@@ -3567,8 +3584,13 @@ body {
 }
 
 .encore-alternative-contact {
-  padding: var(--encore-space-20) 0;
+  padding: 0 0 var(--encore-space-20) 0;
   background: var(--encore-bg-primary);
+}
+
+.encore-alternative-contact .encore-section-header {
+  margin-bottom: 0;
+  padding-top: 0;
 }
 
 .encore-contact-methods {
@@ -6340,11 +6362,6 @@ body {
     margin-bottom: var(--encore-space-6);
 }
 
-.encore-benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--encore-space-4);
-}
 
 .encore-benefit-card {
     background: rgba(255, 255, 255, 0.05);
