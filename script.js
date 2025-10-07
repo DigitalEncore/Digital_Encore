@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeSmoothScrolling();
     initializeAccordion();
     initializeChatWidget();
+    initializeCarousel();
+    initializeModals();
+    initializeFlowAnimations();
 });
 
 // ========================================
@@ -928,6 +931,192 @@ function initializeChatWidget() {
 }
 
 // ========================================
+// 3D CAROUSEL FUNCTIONALITY
+// ========================================
+
+function initializeCarousel() {
+    const carousel = document.getElementById('encore3DCarousel');
+    
+    if (!carousel) return;
+    
+    // Pause auto-rotation on hover
+    carousel.addEventListener('mouseenter', function() {
+        carousel.style.animationPlayState = 'paused';
+    });
+    
+    carousel.addEventListener('mouseleave', function() {
+        carousel.style.animationPlayState = 'running';
+    });
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    
+    carousel.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+        carousel.style.animationPlayState = 'paused';
+    });
+    
+    carousel.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+    
+    carousel.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Only trigger if horizontal swipe is more significant than vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextBtn.click();
+            } else {
+                prevBtn.click();
+            }
+        }
+        
+        carousel.style.animationPlayState = 'running';
+    });
+}
+
+// ========================================
+// MODAL SYSTEM
+// ========================================
+
+function initializeModals() {
+    const modals = document.querySelectorAll('.encore-modal');
+    const modalTriggers = document.querySelectorAll('[data-modal]');
+    
+    // Open modal function
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Focus management
+        const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
+    }
+    
+    // Close modal function
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Close all modals function
+    function closeAllModals() {
+        modals.forEach(modal => {
+            modal.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+    }
+    
+    // Event listeners for modal triggers
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modalId = this.getAttribute('data-modal');
+            openModal(modalId);
+        });
+    });
+    
+    // Event listeners for industry images (clickable images)
+    const industryImages = document.querySelectorAll('.encore-industry-image[data-modal]');
+    industryImages.forEach(image => {
+        image.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const modalId = this.getAttribute('data-modal');
+            console.log('Image clicked, opening modal:', modalId);
+            openModal(modalId);
+        });
+    });
+    
+    // Also make the entire industry card clickable
+    const industryCards = document.querySelectorAll('.encore-industry-card');
+    industryCards.forEach(card => {
+        const image = card.querySelector('.encore-industry-image[data-modal]');
+        if (image) {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.encore-explore-btn')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const modalId = image.getAttribute('data-modal');
+                    console.log('Card clicked, opening modal:', modalId);
+                    openModal(modalId);
+                }
+            });
+        }
+    });
+    
+    // Event listeners for modal close buttons
+    modals.forEach(modal => {
+        const closeBtn = modal.querySelector('.encore-modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                closeModal(modalId);
+            });
+        }
+        
+        // Close modal when clicking outside content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                const modalId = modal.id;
+                closeModal(modalId);
+            }
+        });
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
+    });
+    
+    // Prevent body scroll when modal is open
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const modal = mutation.target;
+                if (modal.classList.contains('encore-modal')) {
+                    if (modal.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        // Check if any other modals are open
+                        const activeModals = document.querySelectorAll('.encore-modal.active');
+                        if (activeModals.length === 0) {
+                            document.body.style.overflow = '';
+                        }
+                    }
+                }
+            }
+        });
+    });
+    
+    modals.forEach(modal => {
+        observer.observe(modal, { attributes: true });
+    });
+}
+
+// ========================================
 // EXPORT FOR TESTING (if needed)
 // ========================================
 
@@ -939,6 +1128,264 @@ if (typeof module !== 'undefined' && module.exports) {
         formatPhoneNumber,
         copyToClipboard,
         initializeAccordion,
-        initializeChatWidget
+        initializeChatWidget,
+        initializeCarousel,
+        initializeModals,
+        initializeFlowAnimations
     };
+}
+
+// ========================================
+// FLOW ANIMATIONS
+// ========================================
+
+function initializeFlowAnimations() {
+    // Function to animate modal content when modal opens
+    function animateModalContent(modal) {
+        // Reset all animations first
+        const allAnimatedElements = modal.querySelectorAll('.animate');
+        allAnimatedElements.forEach(element => element.classList.remove('animate'));
+        
+        // Animate different concept types
+        const conceptType = getModalConceptType(modal);
+        
+        switch(conceptType) {
+            case 'timeline':
+                animateTimelineFlow(modal);
+                break;
+            case 'process':
+                animateProcessFlow(modal);
+                break;
+            case 'journey':
+                animateJourneyMap(modal);
+                break;
+            case 'dashboard':
+                animateDashboardMetrics(modal);
+                break;
+            case 'story':
+                animateStoryChapters(modal);
+                break;
+            case 'comparison':
+                // Comparison doesn't need auto-animation, it's user-triggered
+                break;
+            default:
+                // Fallback to old flow animation
+                animateLegacyFlow(modal);
+        }
+    }
+    
+    // Determine modal concept type based on content
+    function getModalConceptType(modal) {
+        if (modal.querySelector('.encore-timeline-container')) return 'timeline';
+        if (modal.querySelector('.encore-process-container')) return 'process';
+        if (modal.querySelector('.encore-journey-container')) return 'journey';
+        if (modal.querySelector('.encore-dashboard-container')) return 'dashboard';
+        if (modal.querySelector('.encore-story-container')) return 'story';
+        if (modal.querySelector('.encore-comparison-container')) return 'comparison';
+        return 'legacy';
+    }
+    
+    // Timeline Flow Animation
+    function animateTimelineFlow(modal) {
+        const sections = modal.querySelectorAll('.encore-timeline-section');
+        const connector = modal.querySelector('.encore-transformation-connector');
+        const results = modal.querySelector('.encore-results-timeline');
+        
+        sections.forEach((section, index) => {
+            setTimeout(() => {
+                section.classList.add('animate');
+            }, index * 600);
+        });
+        
+        if (connector) {
+            setTimeout(() => {
+                connector.style.opacity = '1';
+                connector.style.transform = 'scale(1)';
+            }, sections.length * 600 + 300);
+        }
+        
+        if (results) {
+            setTimeout(() => {
+                results.style.opacity = '1';
+                results.style.transform = 'translateY(0)';
+            }, sections.length * 600 + 600);
+        }
+    }
+    
+    // Process Flow Animation
+    function animateProcessFlow(modal) {
+        const steps = modal.querySelectorAll('.encore-process-step');
+        const benefits = modal.querySelector('.encore-benefits-showcase');
+        
+        steps.forEach((step, index) => {
+            setTimeout(() => {
+                step.classList.add('animate');
+            }, index * 500);
+        });
+        
+        if (benefits) {
+            setTimeout(() => {
+                benefits.style.opacity = '1';
+                benefits.style.transform = 'translateY(0)';
+            }, steps.length * 500 + 300);
+        }
+    }
+    
+    // Journey Map Animation
+    function animateJourneyMap(modal) {
+        const nodes = modal.querySelectorAll('.encore-journey-node');
+        const connections = modal.querySelectorAll('.encore-journey-connection');
+        const features = modal.querySelector('.encore-interactive-features');
+        
+        nodes.forEach((node, index) => {
+            setTimeout(() => {
+                node.classList.add('animate');
+            }, index * 400);
+        });
+        
+        connections.forEach((connection, index) => {
+            setTimeout(() => {
+                connection.style.opacity = '1';
+                connection.style.transform = 'scale(1)';
+            }, (index + 1) * 400 + 200);
+        });
+        
+        if (features) {
+            setTimeout(() => {
+                features.style.opacity = '1';
+                features.style.transform = 'translateY(0)';
+            }, nodes.length * 400 + 400);
+        }
+    }
+    
+    // Dashboard Metrics Animation
+    function animateDashboardMetrics(modal) {
+        const panels = modal.querySelectorAll('.encore-metrics-panel');
+        const arrow = modal.querySelector('.encore-dashboard-arrow');
+        const features = modal.querySelector('.encore-features-dashboard');
+        
+        panels.forEach((panel, index) => {
+            setTimeout(() => {
+                panel.classList.add('animate');
+            }, index * 400);
+        });
+        
+        if (arrow) {
+            setTimeout(() => {
+                arrow.style.opacity = '1';
+                arrow.style.transform = 'scale(1)';
+            }, panels.length * 400 + 200);
+        }
+        
+        if (features) {
+            setTimeout(() => {
+                features.style.opacity = '1';
+                features.style.transform = 'translateY(0)';
+            }, panels.length * 400 + 400);
+        }
+    }
+    
+    // Story Chapters Animation
+    function animateStoryChapters(modal) {
+        const characterIntro = modal.querySelector('.encore-character-intro');
+        const chapters = modal.querySelectorAll('.encore-chapter');
+        const cta = modal.querySelector('.encore-story-cta');
+        
+        if (characterIntro) {
+            setTimeout(() => {
+                characterIntro.style.opacity = '1';
+                characterIntro.style.transform = 'translateY(0)';
+            }, 200);
+        }
+        
+        chapters.forEach((chapter, index) => {
+            setTimeout(() => {
+                chapter.classList.add('animate');
+            }, 400 + (index * 600));
+        });
+        
+        if (cta) {
+            setTimeout(() => {
+                cta.style.opacity = '1';
+                cta.style.transform = 'translateY(0)';
+            }, 400 + (chapters.length * 600) + 300);
+        }
+    }
+    
+    // Legacy Flow Animation (for old flow elements)
+    function animateLegacyFlow(modal) {
+        const flowSteps = modal.querySelectorAll('.encore-flow-step');
+        const flowArrows = modal.querySelectorAll('.encore-flow-arrow');
+        const resultsSection = modal.querySelector('.encore-results-section');
+        const resultItems = modal.querySelectorAll('.encore-result-item');
+        
+        if (flowSteps.length === 0 && flowArrows.length === 0) {
+            return;
+        }
+        
+        flowSteps.forEach((step, index) => {
+            setTimeout(() => {
+                step.classList.add('animate');
+            }, index * 400);
+        });
+        
+        flowArrows.forEach((arrow, index) => {
+            setTimeout(() => {
+                arrow.classList.add('animate');
+            }, (index + 1) * 400 + 200);
+        });
+        
+        if (resultsSection) {
+            setTimeout(() => {
+                resultsSection.classList.add('animate');
+            }, flowSteps.length * 400 + 400);
+        }
+        
+        resultItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('animate');
+            }, flowSteps.length * 400 + 600 + (index * 200));
+        });
+    }
+    
+    // Add event listeners to modal triggers to start animations
+    const modalTriggers = document.querySelectorAll('[data-modal]');
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            // Start animation after modal is fully opened
+            setTimeout(() => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    animateModalContent(modal);
+                }
+            }, 300);
+        });
+    });
+    
+    // Initialize comparison toggle functionality
+    initializeComparisonToggle();
+}
+
+// Comparison Toggle Functionality
+function initializeComparisonToggle() {
+    const toggleButtons = document.querySelectorAll('.encore-toggle-btn');
+    const comparisonViews = document.querySelectorAll('.encore-comparison-view');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const view = this.getAttribute('data-view');
+            
+            // Remove active class from all buttons and views
+            toggleButtons.forEach(btn => btn.classList.remove('active'));
+            comparisonViews.forEach(view => view.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding view
+            this.classList.add('active');
+            const targetView = document.querySelector(`.encore-view-${view}`);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+        });
+    });
 }
