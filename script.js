@@ -1332,7 +1332,32 @@ function initializeModals() {
         
         if (!workflowSteps.length) return;
 
-        // Auto-reveal sequence from start to end
+        // Check if mobile device
+        const isMobile = window.innerWidth <= 767;
+        
+        // If mobile, show all content immediately without animations
+        if (isMobile) {
+            workflowSteps.forEach(step => {
+                step.style.opacity = '1';
+                step.style.transform = 'translateY(0)';
+                step.style.visibility = 'visible';
+            });
+            
+            if (resultsSection) {
+                resultsSection.style.opacity = '1';
+                resultsSection.style.transform = 'translateY(0)';
+                resultsSection.style.visibility = 'visible';
+            }
+            
+            if (ctaSection) {
+                ctaSection.style.opacity = '1';
+                ctaSection.style.transform = 'translateY(0)';
+                ctaSection.style.visibility = 'visible';
+            }
+            return;
+        }
+
+        // Auto-reveal sequence from start to end (desktop only)
         function startAutoReveal() {
             // Animate workflow steps
             workflowSteps.forEach((step, index) => {
@@ -1388,6 +1413,20 @@ function initializeModals() {
         setTimeout(() => {
             initWorkflowAnimations(modal);
         }, 100);
+        
+        // Handle window resize for mobile/desktop switching
+        const handleResize = () => {
+            initWorkflowAnimations(modal);
+        };
+        
+        window.addEventListener('resize', handleResize);
+        
+        // Clean up resize listener when modal closes
+        const cleanup = () => {
+            window.removeEventListener('resize', handleResize);
+        };
+        
+        modal.addEventListener('modal-closed', cleanup);
         
         // Focus management
         const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
