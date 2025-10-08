@@ -694,21 +694,76 @@ function initializeChatWidget() {
     
     let isOpen = false;
     let messageCount = 0;
+    let conversationContext = {
+        lastTopic: null,
+        userIndustry: null,
+        userGoals: [],
+        previousQuestions: [],
+        followUpNeeded: false
+    };
     
-    // Chat responses database
+    // Enhanced Chat responses database with comprehensive coverage
     const responses = {
-        'what services do you offer?': 'We offer comprehensive website solutions, business automation, customer experience optimization, and custom features. Our services include modern web development, process automation, and digital transformation solutions. What specific challenges are you looking to solve?',
+        // Core Services
+        'what services do you offer?': 'We offer comprehensive digital solutions including modern website development, business process automation, customer experience optimization, and custom digital features. Our services span across web development, automation systems, digital transformation, and ongoing support. What specific challenges are you looking to solve?',
+        'services': 'Our main services include: 🌐 Professional Website Development, ⚡ Business Process Automation, 📱 Custom Web Applications, 🔧 Digital Transformation Consulting, 📊 Analytics & Optimization, and 🛠️ Ongoing Technical Support. Which area interests you most?',
+        'website development': 'We create modern, responsive websites that are fast, SEO-optimized, and user-friendly. Our websites include custom designs, mobile optimization, content management systems, and integration with your business tools. What type of website are you looking for?',
+        'automation': 'We help businesses automate repetitive tasks and streamline workflows. This includes customer management systems, order processing, inventory management, email marketing automation, and custom business logic. What processes would you like to automate?',
+        'web development': 'Our web development services include custom websites, web applications, e-commerce solutions, and API integrations. We use modern technologies and best practices to ensure your site is fast, secure, and scalable. What kind of web solution do you need?',
+        
+        // Pricing & Budget
         'how much does a website cost?': 'Great question! Every project is unique, so pricing depends on your specific needs and goals. Rather than giving you a generic range, I\'d love to understand your requirements first. What type of website or solution are you looking for?',
-        'how long does a project take?': 'Project timelines vary based on complexity and scope. To give you an accurate timeline, I\'d need to understand your specific requirements. What kind of project are you planning?',
+        'pricing': 'Our pricing is customized based on your specific requirements and goals. We offer transparent, value-based pricing with no hidden fees. To provide you with accurate pricing, I\'d love to learn more about your project. What kind of solution are you looking for?',
+        'budget': 'I appreciate you asking about budget! To provide you with the most accurate pricing, I\'d love to understand your project requirements first. We work with various budget ranges and can suggest solutions that fit your needs. What specific goals are you trying to achieve?',
+        'cost': 'Great question about cost! Every project is unique, so pricing varies based on your specific needs. We offer flexible payment options and can work within your budget. What type of website or solution are you planning? This will help me give you more relevant information.',
+        'expensive': 'We understand budget is important! We offer competitive pricing and flexible payment options. Our goal is to provide value that exceeds the investment. What\'s your budget range, and what are you looking to achieve? We can suggest solutions that fit your needs.',
+        'cheap': 'We offer competitive pricing without compromising quality. Our solutions are designed to provide excellent value for your investment. What\'s your budget range? We can work with you to find the best solution within your means.',
+        
+        // Timeline & Process
+        'how long does a project take?': 'Project timelines vary based on complexity and scope. A simple business website typically takes 2-4 weeks, while complex web applications can take 6-12 weeks. To give you an accurate timeline, I\'d need to understand your specific requirements. What kind of project are you planning?',
+        'timeline': 'Project timelines are customized based on your requirements. We provide detailed project schedules and keep you updated throughout the process. To give you a realistic timeline, I\'d need to understand your project scope. What are you looking to build or improve?',
+        'how long': 'Project duration depends on complexity and features. We provide detailed timelines during our consultation and keep you updated throughout the process. What type of project are you considering?',
+        'when will it be ready': 'We provide detailed project schedules and regular updates throughout development. Timeline depends on your specific requirements. What kind of project are you planning?',
+        'process': 'Our process includes: 1) Free consultation to understand your needs, 2) Project planning and timeline, 3) Design and development, 4) Testing and optimization, 5) Launch and training, 6) Ongoing support. Would you like to know more about any specific step?',
+        
+        // Industries & Use Cases
+        'restaurant': 'We specialize in restaurant websites with online ordering, table reservations, menu management, and customer reviews. Our restaurant solutions help increase orders and improve customer experience. What specific features does your restaurant need?',
+        'healthcare': 'We create HIPAA-compliant healthcare websites with patient portals, appointment booking, telemedicine integration, and secure communication. What type of healthcare practice do you have?',
+        'ecommerce': 'We build powerful e-commerce websites with inventory management, payment processing, order tracking, and customer accounts. Our solutions are optimized for conversions and sales growth. What products are you selling?',
+        'real estate': 'We develop real estate websites with property listings, virtual tours, lead capture, and CRM integration. Our solutions help agents generate more leads and close more deals. Are you an agent or agency?',
+        'fitness': 'We create fitness websites with class scheduling, member portals, payment processing, and workout tracking. Our solutions help gyms and trainers grow their membership. What type of fitness business do you have?',
+        'professional services': 'We build professional service websites with client portals, appointment booking, document sharing, and billing integration. Our solutions help consultants and service providers streamline their business. What type of professional services do you offer?',
+        
+        // Technical Questions
+        'mobile': 'All our websites are fully responsive and mobile-optimized. We ensure your site looks and works perfectly on all devices - phones, tablets, and desktops. Mobile optimization is included in all our projects.',
+        'seo': 'We include SEO optimization in all our websites, including fast loading speeds, mobile optimization, clean code, and search engine best practices. We can also provide ongoing SEO services to improve your rankings.',
+        'hosting': 'We can help you with hosting setup and management. We recommend reliable hosting providers and can assist with domain registration, SSL certificates, and ongoing maintenance.',
+        'maintenance': 'We offer ongoing maintenance and support services including updates, backups, security monitoring, and technical support. What kind of ongoing support are you looking for?',
+        'security': 'Security is a top priority. We implement best practices including SSL certificates, secure coding, regular updates, and security monitoring. All our websites are built with security in mind.',
+        
+        // Contact & Consultation
         'i want a free consultation': 'Excellent! I\'d be happy to help you get started. You can contact us directly at vanjerson2@gmail.com or visit our contact page to schedule your free consultation. We\'ll assess your needs and provide customized recommendations.',
-        'pricing': 'I understand you\'re interested in pricing! Every project is different, so I\'d love to learn more about your specific needs first. What kind of solution are you looking for? This will help me provide you with accurate pricing information.',
-        'timeline': 'Project timelines are customized based on your requirements. To give you a realistic timeline, I\'d need to understand your project scope. What are you looking to build or improve?',
+        'consultation': 'We offer free consultations to understand your needs and provide customized recommendations. You can reach us at vanjerson2@gmail.com or through our contact form. What would you like to discuss?',
         'contact': 'You can reach us at vanjerson2@gmail.com or through our contact form. We typically respond within 24 hours and offer free consultations to discuss your project needs.',
-        'budget': 'I appreciate you asking about budget! To provide you with the most accurate pricing, I\'d love to understand your project requirements first. What specific goals are you trying to achieve?',
-        'cost': 'Great question about cost! Every project is unique, so pricing varies based on your specific needs. What type of website or solution are you planning? This will help me give you more relevant information.',
+        'email': 'You can reach us at vanjerson2@gmail.com. We respond to all emails within 24 hours and offer free consultations to discuss your project.',
+        'phone': 'You can reach us at vanjerson2@gmail.com to schedule a phone consultation. We offer free phone consultations to discuss your project needs.',
+        'meeting': 'We offer free consultations via email, phone, or video call. You can reach us at vanjerson2@gmail.com to schedule a meeting that works for you.',
+        
+        // Specific Requests
         'i need a website for my business': 'Excellent! A professional website can transform your business. To provide you with the best solution, I\'d love to learn more about your business. What industry are you in, and what are your main goals for the website?',
         'i want to automate my business processes': 'Great choice! Automation can save you time and reduce errors. What specific processes are you looking to automate? Are you thinking about customer management, order processing, or something else?',
-        'default': 'Thank you for your message! I\'m here to help with any questions about our services. To provide you with the most relevant information, could you tell me more about what you\'re looking to achieve? You can also contact us at vanjerson2@gmail.com for a free consultation.'
+        'i need help with my current website': 'We can help improve your existing website! We offer website audits, redesigns, performance optimization, and feature additions. What issues are you experiencing with your current site?',
+        'i want to start an online business': 'That\'s exciting! We can help you build the perfect online presence for your business. This includes a professional website, e-commerce functionality, and business automation. What type of online business are you planning?',
+        'i need a custom solution': 'We specialize in custom web solutions tailored to your specific needs. We can build custom web applications, integrations, and business logic. What kind of custom solution are you looking for?',
+        
+        // Support & Help
+        'help': 'I\'m here to help! I can answer questions about our services, pricing, process, or help you get started with a project. What would you like to know more about?',
+        'support': 'We provide ongoing support for all our projects including technical assistance, updates, and maintenance. You can reach our support team at vanjerson2@gmail.com. What kind of support do you need?',
+        'problem': 'I\'m sorry to hear you\'re experiencing an issue. Please describe the problem you\'re facing, and I\'ll do my best to help you resolve it. You can also contact our support team at vanjerson2@gmail.com.',
+        'issue': 'I\'m here to help resolve any issues you might have. Please describe the problem, and I\'ll assist you or connect you with our technical team. You can also reach us at vanjerson2@gmail.com.',
+        
+        // Default fallback
+        'default': 'Thank you for your message! I\'m here to help with any questions about our services, pricing, process, or technical requirements. To provide you with the most relevant information, could you tell me more about what you\'re looking to achieve? You can also contact us at vanjerson2@gmail.com for a free consultation.'
     };
     
     // Toggle chat window
@@ -732,6 +787,9 @@ function initializeChatWidget() {
     // Send message function
     function sendMessage(message) {
         if (!message.trim()) return;
+        
+        // Update conversation context
+        updateConversationContext(message);
         
         // Add user message
         addMessage(message, 'user');
@@ -830,29 +888,300 @@ function initializeChatWidget() {
         messageCount++;
     }
     
-    // Get appropriate response
+    // Enhanced response matching with intelligent keyword detection
     function getResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
         // Check for exact matches first
         for (const [key, response] of Object.entries(responses)) {
-            if (message.includes(key)) {
+            if (lowerMessage.includes(key)) {
                 return response;
             }
         }
         
-        // Check for keywords
-        if (message.includes('service') || message.includes('offer')) {
-            return responses['what services do you offer?'];
-        } else if (message.includes('price') || message.includes('cost') || message.includes('expensive')) {
-            return responses['how much does a website cost?'];
-        } else if (message.includes('time') || message.includes('long') || message.includes('duration')) {
-            return responses['how long does a project take?'];
-        } else if (message.includes('contact') || message.includes('email') || message.includes('reach')) {
-            return responses['contact'];
-        } else if (message.includes('consultation') || message.includes('free') || message.includes('meeting')) {
-            return responses['i want a free consultation'];
+        // Intelligent keyword matching with context awareness
+        const keywordMap = {
+            // Services
+            'service': ['services', 'what services do you offer?'],
+            'website': ['website development', 'i need a website for my business'],
+            'automation': ['automation', 'i want to automate my business processes'],
+            'web development': ['web development', 'website development'],
+            'app': ['web development', 'i need a custom solution'],
+            'application': ['web development', 'i need a custom solution'],
+            
+            // Pricing & Budget
+            'price': ['pricing', 'how much does a website cost?'],
+            'cost': ['cost', 'how much does a website cost?'],
+            'budget': ['budget', 'pricing'],
+            'expensive': ['expensive', 'pricing'],
+            'cheap': ['cheap', 'pricing'],
+            'affordable': ['pricing', 'budget'],
+            'investment': ['pricing', 'budget'],
+            
+            // Timeline
+            'time': ['timeline', 'how long does a project take?'],
+            'long': ['how long', 'how long does a project take?'],
+            'duration': ['timeline', 'how long does a project take?'],
+            'when': ['when will it be ready', 'timeline'],
+            'ready': ['when will it be ready', 'timeline'],
+            'finish': ['timeline', 'how long does a project take?'],
+            'complete': ['timeline', 'how long does a project take?'],
+            
+            // Industries
+            'restaurant': ['restaurant'],
+            'food': ['restaurant'],
+            'cafe': ['restaurant'],
+            'healthcare': ['healthcare'],
+            'medical': ['healthcare'],
+            'doctor': ['healthcare'],
+            'clinic': ['healthcare'],
+            'ecommerce': ['ecommerce'],
+            'shop': ['ecommerce'],
+            'store': ['ecommerce'],
+            'sell': ['ecommerce'],
+            'real estate': ['real estate'],
+            'property': ['real estate'],
+            'agent': ['real estate'],
+            'fitness': ['fitness'],
+            'gym': ['fitness'],
+            'trainer': ['fitness'],
+            'professional': ['professional services'],
+            'consultant': ['professional services'],
+            'lawyer': ['professional services'],
+            'accountant': ['professional services'],
+            
+            // Technical
+            'mobile': ['mobile'],
+            'responsive': ['mobile'],
+            'seo': ['seo'],
+            'search': ['seo'],
+            'hosting': ['hosting'],
+            'domain': ['hosting'],
+            'maintenance': ['maintenance'],
+            'support': ['support'],
+            'security': ['security'],
+            'secure': ['security'],
+            
+            // Contact & Consultation
+            'contact': ['contact'],
+            'email': ['email'],
+            'phone': ['phone'],
+            'call': ['phone'],
+            'consultation': ['consultation', 'i want a free consultation'],
+            'free': ['i want a free consultation', 'consultation'],
+            'meeting': ['meeting'],
+            'discuss': ['consultation'],
+            'talk': ['consultation'],
+            
+            // Specific Requests
+            'help': ['help'],
+            'problem': ['problem'],
+            'issue': ['issue'],
+            'broken': ['problem'],
+            'fix': ['support'],
+            'improve': ['i need help with my current website'],
+            'redesign': ['i need help with my current website'],
+            'update': ['maintenance'],
+            'start': ['i want to start an online business'],
+            'business': ['i need a website for my business'],
+            'custom': ['i need a custom solution'],
+            'unique': ['i need a custom solution'],
+            'special': ['i need a custom solution']
+        };
+        
+        // Find the best matching keyword
+        let bestMatch = null;
+        let bestScore = 0;
+        
+        for (const [keyword, responses] of Object.entries(keywordMap)) {
+            if (lowerMessage.includes(keyword)) {
+                // Calculate relevance score based on keyword position and context
+                const keywordIndex = lowerMessage.indexOf(keyword);
+                const score = keyword.length + (lowerMessage.length - keywordIndex) / lowerMessage.length;
+                
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = responses[0]; // Use the first (most relevant) response
+                }
+            }
         }
         
-        return responses['default'];
+        // Check if message needs human support
+        if (needsHumanSupport(message)) {
+            return generateHumanSupportResponse(message);
+        }
+        
+        // Return the best match or generate a contextual response
+        if (bestMatch && responses[bestMatch]) {
+            return responses[bestMatch];
+        }
+        
+        // Generate contextual response for custom questions
+        return generateContextualResponse(lowerMessage);
+    }
+    
+    // Update conversation context based on user message
+    function updateConversationContext(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Detect industry mentions
+        const industries = ['restaurant', 'healthcare', 'medical', 'ecommerce', 'real estate', 'fitness', 'professional', 'lawyer', 'accountant', 'consultant', 'gym', 'clinic', 'cafe', 'food', 'shop', 'store'];
+        for (const industry of industries) {
+            if (lowerMessage.includes(industry)) {
+                conversationContext.userIndustry = industry;
+                break;
+            }
+        }
+        
+        // Detect goals and needs
+        if (lowerMessage.includes('website') || lowerMessage.includes('site')) {
+            conversationContext.userGoals.push('website');
+        }
+        if (lowerMessage.includes('automation') || lowerMessage.includes('automate')) {
+            conversationContext.userGoals.push('automation');
+        }
+        if (lowerMessage.includes('ecommerce') || lowerMessage.includes('online store')) {
+            conversationContext.userGoals.push('ecommerce');
+        }
+        if (lowerMessage.includes('mobile') || lowerMessage.includes('responsive')) {
+            conversationContext.userGoals.push('mobile');
+        }
+        if (lowerMessage.includes('seo') || lowerMessage.includes('search')) {
+            conversationContext.userGoals.push('seo');
+        }
+        
+        // Store previous questions for context
+        conversationContext.previousQuestions.push(message);
+        if (conversationContext.previousQuestions.length > 5) {
+            conversationContext.previousQuestions.shift(); // Keep only last 5 questions
+        }
+        
+        // Detect if follow-up is needed
+        conversationContext.followUpNeeded = lowerMessage.includes('?') || 
+                                           lowerMessage.includes('how') || 
+                                           lowerMessage.includes('what') || 
+                                           lowerMessage.includes('why');
+    }
+    
+    // Generate contextual responses for custom questions
+    function generateContextualResponse(message) {
+        // Check for question patterns
+        if (message.includes('?') || message.includes('how') || message.includes('what') || message.includes('why') || message.includes('when') || message.includes('where')) {
+            // Industry-specific questions
+            if (message.includes('restaurant') || message.includes('food') || message.includes('cafe')) {
+                return 'Great question about restaurant solutions! We specialize in restaurant websites with online ordering, menu management, and customer engagement features. What specific aspect of restaurant technology are you interested in?';
+            }
+            if (message.includes('healthcare') || message.includes('medical') || message.includes('doctor')) {
+                return 'Excellent question about healthcare solutions! We create HIPAA-compliant websites with patient portals, appointment booking, and secure communication. What type of healthcare practice do you have?';
+            }
+            if (message.includes('ecommerce') || message.includes('shop') || message.includes('sell')) {
+                return 'Great question about e-commerce! We build powerful online stores with inventory management, payment processing, and customer accounts. What products are you looking to sell online?';
+            }
+            
+            // Technical questions
+            if (message.includes('mobile') || message.includes('phone') || message.includes('tablet')) {
+                return 'Great question about mobile optimization! All our websites are fully responsive and work perfectly on all devices. Mobile optimization is included in all our projects. What specific mobile features are you interested in?';
+            }
+            if (message.includes('seo') || message.includes('search') || message.includes('google')) {
+                return 'Excellent question about SEO! We include comprehensive SEO optimization in all our websites, including fast loading, mobile optimization, and search engine best practices. What SEO goals do you have?';
+            }
+            
+            // General business questions
+            if (message.includes('business') || message.includes('company') || message.includes('startup')) {
+                return 'Great question about business solutions! We help businesses of all sizes with their digital presence and automation needs. What type of business are you running, and what challenges are you facing?';
+            }
+            
+            // Default question response
+            return 'That\'s a great question! I\'d be happy to help you with that. To provide you with the most accurate and helpful information, could you tell me a bit more about your specific situation or requirements? You can also contact us at vanjerson2@gmail.com for a detailed discussion.';
+        }
+        
+        // Check for statement patterns
+        if (message.includes('need') || message.includes('want') || message.includes('looking for')) {
+            if (message.includes('website') || message.includes('site')) {
+                return 'I understand you\'re looking for a website solution! That\'s exciting. To provide you with the best recommendation, could you tell me more about your business and what goals you want to achieve with your website?';
+            }
+            if (message.includes('automation') || message.includes('automate')) {
+                return 'Great! Automation can really transform your business efficiency. What specific processes or tasks are you looking to automate? This will help me suggest the best solutions for your needs.';
+            }
+            if (message.includes('help') || message.includes('assistance')) {
+                return 'I\'m here to help! I can assist you with questions about our services, pricing, process, or help you get started with a project. What specific area would you like help with?';
+            }
+        }
+        
+        // Check for problem statements
+        if (message.includes('problem') || message.includes('issue') || message.includes('broken') || message.includes('not working')) {
+            return 'I\'m sorry to hear you\'re experiencing an issue. I\'m here to help resolve it. Could you describe the problem in more detail? You can also contact our support team at vanjerson2@gmail.com for immediate assistance.';
+        }
+        
+        // Check for urgency indicators
+        if (message.includes('urgent') || message.includes('asap') || message.includes('quickly') || message.includes('fast')) {
+            return 'I understand this is urgent! I\'ll do my best to help you quickly. Could you provide more details about what you need? For immediate assistance, you can also contact us directly at vanjerson2@gmail.com.';
+        }
+        
+        // Generate personalized response based on conversation context
+        let personalizedResponse = 'Thank you for your message! ';
+        
+        // Add industry-specific context
+        if (conversationContext.userIndustry) {
+            personalizedResponse += `I see you're interested in ${conversationContext.userIndustry} solutions. `;
+        }
+        
+        // Add goals context
+        if (conversationContext.userGoals.length > 0) {
+            const goalsText = conversationContext.userGoals.join(', ');
+            personalizedResponse += `Based on your interest in ${goalsText}, `;
+        }
+        
+        // Add follow-up based on context
+        if (conversationContext.userIndustry && conversationContext.userGoals.length > 0) {
+            personalizedResponse += `I can provide specific recommendations for your ${conversationContext.userIndustry} business. What specific challenges are you facing with ${conversationContext.userGoals[0]}?`;
+        } else if (conversationContext.userIndustry) {
+            personalizedResponse += `I can help you with ${conversationContext.userIndustry}-specific solutions. What type of digital solution are you looking for?`;
+        } else if (conversationContext.userGoals.length > 0) {
+            personalizedResponse += `I can help you with ${conversationContext.userGoals[0]} solutions. What industry is your business in?`;
+        } else {
+            personalizedResponse += 'I\'m here to help with any questions about our services, pricing, process, or technical requirements. To provide you with the most relevant information, could you tell me more about what you\'re looking to achieve?';
+        }
+        
+        personalizedResponse += ' You can also contact us at vanjerson2@gmail.com for a free consultation.';
+        
+        return personalizedResponse;
+    }
+    
+    // Check if message needs human support
+    function needsHumanSupport(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Complex technical questions
+        const complexKeywords = ['api', 'database', 'server', 'backend', 'frontend', 'framework', 'programming', 'code', 'development', 'technical', 'integration', 'custom development'];
+        for (const keyword of complexKeywords) {
+            if (lowerMessage.includes(keyword)) {
+                return true;
+            }
+        }
+        
+        // Multiple questions in one message
+        const questionCount = (lowerMessage.match(/\?/g) || []).length;
+        if (questionCount > 2) {
+            return true;
+        }
+        
+        // Very long messages (likely complex requests)
+        if (message.length > 200) {
+            return true;
+        }
+        
+        // Specific request for human
+        if (lowerMessage.includes('human') || lowerMessage.includes('person') || lowerMessage.includes('agent') || lowerMessage.includes('representative')) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    // Generate human support response
+    function generateHumanSupportResponse(message) {
+        return `I understand you have a complex question that would benefit from speaking with one of our experts. Let me connect you with our team for personalized assistance. You can reach us directly at vanjerson2@gmail.com or schedule a free consultation. We'll provide detailed answers to your technical questions and help you with your specific requirements.`;
     }
     
     // Send button click
