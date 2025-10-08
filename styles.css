@@ -2122,33 +2122,74 @@ body {
 
 .encore-process-step {
   text-align: center;
-  padding: var(--encore-space-6);
+  padding: var(--encore-space-8);
+  background: var(--encore-bg-card);
+  border: 1px solid var(--encore-border-primary);
+  border-radius: var(--encore-radius-xl);
+  box-shadow: var(--encore-shadow-md);
+  transition: all var(--encore-transition-normal);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--encore-space-4);
+}
+
+.encore-process-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--encore-primary-500), var(--encore-accent-500));
+  transform: scaleX(0);
+  transition: transform var(--encore-transition-normal);
+}
+
+.encore-process-step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--encore-shadow-xl);
+}
+
+.encore-process-step:hover::before {
+  transform: scaleX(1);
+}
+
+.encore-process-step:hover .encore-process-number {
+  transform: scale(1.1);
 }
 
 .encore-process-number {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, var(--encore-primary-600), var(--encore-accent-600));
   color: var(--encore-text-inverse);
   border-radius: var(--encore-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--encore-font-size-xl);
+  font-size: var(--encore-font-size-2xl);
   font-weight: var(--encore-font-weight-bold);
   margin: 0 auto var(--encore-space-4);
+  transition: all var(--encore-transition-normal);
+  box-shadow: var(--encore-shadow-md);
 }
 
 .encore-process-title {
-  font-size: var(--encore-font-size-lg);
+  font-size: var(--encore-font-size-xl);
   font-weight: var(--encore-font-weight-semibold);
   color: var(--encore-text-primary);
-  margin-bottom: var(--encore-space-3);
+  margin-bottom: var(--encore-space-4);
+  text-align: center;
 }
 
 .encore-process-description {
   color: var(--encore-text-secondary);
   line-height: var(--encore-line-height-relaxed);
+  text-align: center;
+  font-size: var(--encore-font-size-base);
 }
 
 .encore-contact-benefits {
@@ -4822,7 +4863,12 @@ body {
 
 .encore-how-it-works {
     padding: var(--encore-space-8) 0 8rem 0;
-    background: linear-gradient(135deg, var(--encore-bg-primary) 0%, var(--encore-bg-secondary) 100%);
+    background: linear-gradient(135deg, 
+        var(--encore-bg-primary) 0%, 
+        rgba(59, 130, 246, 0.05) 25%,
+        rgba(139, 92, 246, 0.05) 50%,
+        rgba(236, 72, 153, 0.05) 75%,
+        var(--encore-bg-secondary) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -4834,9 +4880,58 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e5e7eb" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.1;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23e5e7eb" stroke-width="0.3" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.6;
     z-index: 1;
+    animation: encore-bg-shift 20s ease-in-out infinite;
+}
+
+.encore-how-it-works::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%),
+        linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.01) 50%, transparent 70%);
+    z-index: 2;
+    animation: encore-shimmer 15s ease-in-out infinite;
+}
+
+@keyframes encore-bg-shift {
+    0%, 100% { 
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    25% { 
+        transform: translateX(-10px) translateY(-5px) scale(1.02);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: translateX(5px) translateY(-10px) scale(0.98);
+        opacity: 0.7;
+    }
+    75% { 
+        transform: translateX(-5px) translateY(5px) scale(1.01);
+        opacity: 0.9;
+    }
+}
+
+@keyframes encore-shimmer {
+    0%, 100% { 
+        transform: translateX(-100%) translateY(-100%);
+        opacity: 0;
+    }
+    50% { 
+        transform: translateX(100%) translateY(100%);
+        opacity: 1;
+    }
 }
 
 .encore-carousel-container {
@@ -4846,9 +4941,114 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 3;
     margin-top: 4rem;
-    margin-bottom: 4rem;
+}
+
+/* Floating animated elements */
+.encore-how-it-works .encore-floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    backdrop-filter: blur(10px);
+    z-index: 2;
+    animation: encore-float 20s ease-in-out infinite;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 25s;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(2) {
+    width: 40px;
+    height: 40px;
+    top: 20%;
+    right: 15%;
+    animation-delay: 5s;
+    animation-duration: 30s;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 10s;
+    animation-duration: 35s;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(4) {
+    width: 50px;
+    height: 50px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 15s;
+    animation-duration: 28s;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(5) {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 5%;
+    animation-delay: 8s;
+    animation-duration: 22s;
+}
+
+.encore-how-it-works .encore-floating-element:nth-child(6) {
+    width: 70px;
+    height: 70px;
+    top: 60%;
+    right: 5%;
+    animation-delay: 12s;
+    animation-duration: 32s;
+}
+
+@keyframes encore-float {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px) rotate(90deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-10px) translateX(-15px) rotate(180deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-30px) translateX(5px) rotate(270deg);
+        opacity: 0.7;
+    }
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .encore-how-it-works {
+    background: linear-gradient(135deg, 
+        var(--encore-bg-primary) 0%, 
+        rgba(59, 130, 246, 0.03) 25%,
+        rgba(139, 92, 246, 0.03) 50%,
+        rgba(236, 72, 153, 0.03) 75%,
+        var(--encore-bg-secondary) 100%);
+}
+
+[data-theme="light"] .encore-how-it-works::before {
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.04) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23000000" stroke-width="0.2" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.4;
+}
+
+[data-theme="light"] .encore-how-it-works .encore-floating-element {
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
 }
 
 .encore-3d-carousel {
@@ -4856,7 +5056,7 @@ body {
     width: 300px;
     height: 400px;
     transform-style: preserve-3d;
-    animation: rotateCarousel 20s infinite linear;
+    animation: rotateCarousel 60s infinite linear;
     transform-origin: center center;
 }
 
@@ -6233,7 +6433,7 @@ body {
     gap: var(--encore-space-8);
 }
 
-.encore-process-step {
+.encore-modal .encore-process-step {
     display: flex;
     align-items: center;
     gap: var(--encore-space-6);
@@ -6247,7 +6447,7 @@ body {
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.encore-process-step.animate {
+.encore-modal .encore-process-step.animate {
     opacity: 1;
     transform: translateY(0);
 }
@@ -6528,18 +6728,22 @@ body {
     gap: var(--encore-space-2);
 }
 
-.encore-stat,
-.encore-feature-item,
-.encore-metric {
+.encore-journey-container .encore-stat,
+.encore-journey-container .encore-feature-item,
+.encore-journey-container .encore-metric {
     display: flex;
     align-items: center;
     gap: var(--encore-space-2);
     font-size: var(--encore-font-size-sm);
     color: var(--encore-text-secondary);
+    padding: var(--encore-space-2) var(--encore-space-3);
+    border-radius: var(--encore-radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.encore-feature-item i,
-.encore-metric i {
+.encore-journey-container .encore-feature-item i,
+.encore-journey-container .encore-metric i {
     color: var(--encore-accent-primary);
 }
 
@@ -8078,6 +8282,12 @@ body {
 [data-theme="light"] .encore-interactive-features,
 [data-theme="light"] .encore-features-dashboard {
     background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .encore-journey-container .encore-stat,
+[data-theme="light"] .encore-journey-container .encore-feature-item,
+[data-theme="light"] .encore-journey-container .encore-metric {
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -8102,6 +8312,322 @@ body {
     background: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.15);
 }
+
+/* Modern Workflow Showcase Styles */
+.encore-workflow-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: var(--encore-space-6);
+}
+
+.encore-workflow-header {
+    text-align: center;
+    margin-bottom: var(--encore-space-8);
+}
+
+.encore-workflow-title {
+    font-size: var(--encore-font-size-2xl);
+    font-weight: var(--encore-font-weight-bold);
+    color: var(--encore-text-primary);
+    margin-bottom: var(--encore-space-3);
+    background: linear-gradient(135deg, var(--encore-primary-600), var(--encore-accent-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.encore-workflow-subtitle {
+    font-size: var(--encore-font-size-lg);
+    color: var(--encore-text-secondary);
+    margin-bottom: var(--encore-space-6);
+}
+
+
+.encore-workflow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--encore-space-8);
+    margin-bottom: var(--encore-space-8);
+}
+
+.encore-workflow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--encore-space-6);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.encore-workflow-step.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.encore-step-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.encore-step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--encore-primary-600), var(--encore-accent-600));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--encore-font-size-lg);
+    font-weight: var(--encore-font-weight-bold);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.encore-workflow-step:hover .encore-step-number {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+}
+
+.encore-step-line {
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(180deg, var(--encore-primary-500), transparent);
+    margin-top: var(--encore-space-2);
+    opacity: 0.3;
+}
+
+.encore-workflow-step:last-child .encore-step-line {
+    display: none;
+}
+
+.encore-step-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--encore-radius-xl);
+    padding: var(--encore-space-6);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.encore-step-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--encore-primary-500), var(--encore-accent-500));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.encore-workflow-step:hover .encore-step-content::before {
+    transform: scaleX(1);
+}
+
+.encore-workflow-step:hover .encore-step-content {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.encore-step-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--encore-accent-100), var(--encore-accent-200));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--encore-font-size-2xl);
+    color: var(--encore-accent-600);
+    margin-bottom: var(--encore-space-4);
+    transition: all 0.3s ease;
+}
+
+.encore-workflow-step:hover .encore-step-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, var(--encore-accent-200), var(--encore-accent-300));
+}
+
+.encore-step-title {
+    font-size: var(--encore-font-size-xl);
+    font-weight: var(--encore-font-weight-semibold);
+    color: var(--encore-text-primary);
+    margin-bottom: var(--encore-space-3);
+}
+
+.encore-step-description {
+    font-size: var(--encore-font-size-base);
+    color: var(--encore-text-secondary);
+    line-height: var(--encore-line-height-relaxed);
+    margin-bottom: var(--encore-space-4);
+}
+
+.encore-step-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--encore-space-3);
+}
+
+.encore-detail-item {
+    display: flex;
+    align-items: center;
+    gap: var(--encore-space-2);
+    padding: var(--encore-space-2) var(--encore-space-3);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--encore-radius-md);
+    font-size: var(--encore-font-size-sm);
+    color: var(--encore-text-secondary);
+    transition: all 0.3s ease;
+}
+
+.encore-detail-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.encore-detail-item i {
+    color: var(--encore-accent-500);
+    font-size: var(--encore-font-size-sm);
+}
+
+.encore-workflow-results {
+    text-align: center;
+    margin-bottom: var(--encore-space-8);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+}
+
+.encore-workflow-results.animate {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.encore-results-title {
+    font-size: var(--encore-font-size-xl);
+    font-weight: var(--encore-font-weight-semibold);
+    color: var(--encore-text-primary);
+    margin-bottom: var(--encore-space-6);
+}
+
+.encore-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--encore-space-6);
+}
+
+.encore-result-item {
+    text-align: center;
+    padding: var(--encore-space-6);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--encore-radius-xl);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.encore-result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.encore-result-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--encore-primary-500), var(--encore-accent-500));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--encore-font-size-xl);
+    color: white;
+    margin: 0 auto var(--encore-space-4);
+}
+
+.encore-result-number {
+    font-size: var(--encore-font-size-3xl);
+    font-weight: var(--encore-font-weight-bold);
+    color: var(--encore-primary-600);
+    margin-bottom: var(--encore-space-2);
+}
+
+.encore-result-label {
+    font-size: var(--encore-font-size-base);
+    color: var(--encore-text-secondary);
+    font-weight: var(--encore-font-weight-medium);
+}
+
+.encore-workflow-cta {
+    text-align: center;
+    padding: var(--encore-space-8);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: var(--encore-radius-xl);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+}
+
+.encore-workflow-cta.animate {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.encore-cta-title {
+    font-size: var(--encore-font-size-xl);
+    font-weight: var(--encore-font-weight-semibold);
+    color: var(--encore-text-primary);
+    margin-bottom: var(--encore-space-3);
+}
+
+.encore-cta-text {
+    font-size: var(--encore-font-size-base);
+    color: var(--encore-text-secondary);
+    margin-bottom: var(--encore-space-6);
+}
+
+.encore-cta-btn {
+    padding: var(--encore-space-4) var(--encore-space-8);
+    font-size: var(--encore-font-size-lg);
+    font-weight: var(--encore-font-weight-semibold);
+}
+
+/* Light mode styles */
+[data-theme="light"] .encore-workflow-step-content,
+[data-theme="light"] .encore-result-item,
+[data-theme="light"] .encore-workflow-cta {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .encore-workflow-results {
+    background: transparent;
+}
+
+[data-theme="light"] .encore-detail-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .encore-detail-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
 
 /* Animation Keyframes */
 @keyframes pulse {
@@ -8143,6 +8669,7 @@ body {
         flex-direction: column;
         text-align: center;
         gap: var(--encore-space-4);
+        padding: var(--encore-space-6);
     }
     
     .encore-step-number {

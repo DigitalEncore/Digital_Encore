@@ -994,6 +994,58 @@ function initializeCarousel() {
 function initializeModals() {
     const modals = document.querySelectorAll('.encore-modal');
     const modalTriggers = document.querySelectorAll('[data-modal]');
+
+    // Workflow animation functionality
+    function initWorkflowAnimations(modal) {
+        const workflowSteps = modal.querySelectorAll('.encore-workflow-step');
+        const resultsSection = modal.querySelector('.encore-workflow-results');
+        const ctaSection = modal.querySelector('.encore-workflow-cta');
+        
+        if (!workflowSteps.length) return;
+
+        // Auto-reveal sequence from start to end
+        function startAutoReveal() {
+            // Animate workflow steps
+            workflowSteps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add('animate');
+                    
+                    // Smooth scroll to center the current step
+                    step.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, index * 800); // 800ms delay between each step
+            });
+
+            // Animate results section after all workflow steps
+            if (resultsSection) {
+                setTimeout(() => {
+                    resultsSection.classList.add('animate');
+                    resultsSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, workflowSteps.length * 800 + 400); // After all steps + small delay
+            }
+
+            // Animate CTA section after results
+            if (ctaSection) {
+                setTimeout(() => {
+                    ctaSection.classList.add('animate');
+                    ctaSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, workflowSteps.length * 800 + 1200); // After results section
+            }
+        }
+
+        // Start the auto-reveal sequence when modal opens
+        setTimeout(() => {
+            startAutoReveal();
+        }, 500); // Small delay to ensure modal is fully loaded
+    }
     
     // Open modal function
     function openModal(modalId) {
@@ -1002,6 +1054,11 @@ function initializeModals() {
         
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Initialize workflow animations if this modal has workflow content
+        setTimeout(() => {
+            initWorkflowAnimations(modal);
+        }, 100);
         
         // Focus management
         const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
