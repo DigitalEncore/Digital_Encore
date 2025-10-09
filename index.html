@@ -109,12 +109,32 @@
     </script>
 </head>
 <body>
+    <!-- Follow Us Section -->
+    <div class="encore-follow-us">
+        <div class="encore-follow-us-content">
+            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-follow-us-link">
+                <span class="encore-follow-us-label">Fa.</span>
+            </a>
+            <div class="encore-follow-us-line"></div>
+            <span class="encore-follow-us-text">Follow Us</span>
+        </div>
+    </div>
+
+    <!-- Fixed Logo in Top Left Corner -->
+    <div class="encore-fixed-logo">
+        <a href="/" class="encore-logo-fixed">
+            <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img-fixed">
+        </a>
+    </div>
+
     <!-- Header -->
     <header class="encore-header">
         <nav class="encore-nav">
             <div class="encore-nav-container">
-                <a href="/" class="encore-logo">
-                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-logo-img">
+                <div class="encore-nav-spacer"></div>
+                
+                <a href="/" class="encore-mobile-logo">
+                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
                 </a>
                 
                 <div class="encore-nav-menu" id="encoreNavMenu">
@@ -126,6 +146,9 @@
                 </div>
                 
                 <div class="encore-nav-controls">
+                    <button class="encore-search-toggle" id="encoreSearchToggle" aria-label="Search">
+                        <i class="fas fa-search encore-search-icon"></i>
+                    </button>
                     <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
                         <i class="fas fa-moon encore-theme-icon"></i>
                     </button>
@@ -138,6 +161,67 @@
             </div>
         </nav>
     </header>
+
+    <!-- Search Modal -->
+    <div class="encore-search-modal" id="encoreSearchModal">
+        <div class="encore-search-overlay" id="encoreSearchOverlay"></div>
+        <div class="encore-search-container">
+            <div class="encore-search-header">
+                <div class="encore-search-input-container">
+                    <i class="fas fa-search encore-search-input-icon"></i>
+                    <input type="text" class="encore-search-input" id="encoreSearchInput" placeholder="Search services, features, or topics..." autocomplete="off">
+                    <button class="encore-search-clear" id="encoreSearchClear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="encore-search-close" id="encoreSearchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="encore-search-content">
+                <div class="encore-search-suggestions" id="encoreSearchSuggestions">
+                    <div class="encore-search-suggestion-category">
+                        <h4>Popular Searches</h4>
+                        <div class="encore-search-suggestion-tags">
+                            <span class="encore-search-tag" data-search="website development">Website Development</span>
+                            <span class="encore-search-tag" data-search="business automation">Business Automation</span>
+                            <span class="encore-search-tag" data-search="CRM automation">CRM Automation</span>
+                            <span class="encore-search-tag" data-search="email marketing">Email Marketing</span>
+                            <span class="encore-search-tag" data-search="calendar booking">Calendar Booking</span>
+                            <span class="encore-search-tag" data-search="customer experience">Customer Experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="encore-search-suggestion-category">
+                        <h4>Services</h4>
+                        <div class="encore-search-suggestion-tags">
+                            <span class="encore-search-tag" data-search="UI/UX design">UI/UX Design</span>
+                            <span class="encore-search-tag" data-search="Google Analytics">Google Analytics</span>
+                            <span class="encore-search-tag" data-search="digital transformation">Digital Transformation</span>
+                            <span class="encore-search-tag" data-search="automation solutions">Automation Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="encore-search-results" id="encoreSearchResults" style="display: none;">
+                    <div class="encore-search-results-header">
+                        <h4>Search Results</h4>
+                        <span class="encore-search-results-count" id="encoreSearchResultsCount"></span>
+                    </div>
+                    <div class="encore-search-results-list" id="encoreSearchResultsList"></div>
+                </div>
+                
+                <div class="encore-search-no-results" id="encoreSearchNoResults" style="display: none;">
+                    <div class="encore-search-no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>No results found</h4>
+                    <p>Try searching for something else or check the popular searches above.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="encore-home" class="encore-hero">
@@ -211,7 +295,7 @@
     <!-- Services Section -->
     <section id="encore-services" class="encore-services">
         <div class="encore-container">
-            <div class="encore-section-header">
+            <div class="encore-section-header encore-scroll-reveal">
                 <h2 class="encore-section-title">Professional Digital Services & Website Automation Solutions</h2>
                 <p class="encore-section-description">
                     Comprehensive digital services including website development, business automation, and digital transformation solutions designed to elevate your business and enhance customer experiences
@@ -220,7 +304,7 @@
             
             <div class="encore-services-grid">
                 <!-- Website UI/UX Development -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
@@ -240,7 +324,7 @@
                 </div>
 
                 <!-- CRM Automation -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -260,7 +344,7 @@
                 </div>
 
                 <!-- Email Campaign Automation -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -280,7 +364,7 @@
                 </div>
 
                 <!-- Calendar Booking System -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -300,7 +384,7 @@
                 </div>
 
                 <!-- Business System Automation -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
@@ -321,7 +405,7 @@
                 </div>
 
                 <!-- Customer Experience Solutions -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -341,7 +425,7 @@
                 </div>
 
                 <!-- Google Analytics Setup -->
-                <div class="encore-service-card">
+                <div class="encore-service-card encore-stagger-item">
                     <div class="encore-service-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -362,7 +446,7 @@
             </div>
             
             <!-- Services CTA Section -->
-            <div class="encore-services-cta">
+            <div class="encore-services-cta encore-scale-up">
                 <div class="encore-services-cta-content">
                     <h3 class="encore-services-cta-title">Ready to Transform Your Business?</h3>
                     <p class="encore-services-cta-description">
@@ -380,7 +464,7 @@
     <!-- Why Choose Us Section -->
     <section id="encore-why-choose" class="encore-why-choose">
         <div class="encore-container">
-            <div class="encore-section-header">
+            <div class="encore-section-header encore-fade-in-left">
                 <h2 class="encore-section-title">Why Choose Digital Encore</h2>
                 <p class="encore-section-description">
                     We don't just build websites – we create digital ecosystems that drive your business forward
@@ -388,7 +472,7 @@
             </div>
             
             <div class="encore-benefits-grid">
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
@@ -400,7 +484,7 @@
                     </p>
                 </div>
 
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -412,7 +496,7 @@
                     </p>
                 </div>
 
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -424,7 +508,7 @@
                     </p>
                 </div>
 
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
@@ -436,7 +520,7 @@
                     </p>
                 </div>
 
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
@@ -448,7 +532,7 @@
                     </p>
                 </div>
 
-                <div class="encore-benefit-item">
+                <div class="encore-benefit-item encore-stagger-item">
                     <div class="encore-benefit-icon">
                         <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -466,7 +550,7 @@
     <!-- Contact Section -->
     <section id="encore-contact" class="encore-contact">
         <div class="encore-container">
-            <div class="encore-section-header">
+            <div class="encore-section-header encore-fade-in-right">
                 <h2 class="encore-section-title">Get Your Free Consultation</h2>
                 <p class="encore-section-description">
                     Ready to transform your business? Let's discuss how we can help you achieve your goals
@@ -474,7 +558,7 @@
             </div>
             
             <div class="encore-contact-content">
-                <div class="encore-contact-info">
+                <div class="encore-contact-info encore-fade-in-left">
                     <h3 class="encore-contact-title">Let's Start Your Digital Transformation</h3>
                     <p class="encore-contact-description">
                         Our team is ready to help you build a professional online presence and automate your business processes. 
@@ -517,7 +601,7 @@
                     </div>
                 </div>
                 
-                <div class="encore-get-started-form-container">
+                <div class="encore-get-started-form-container encore-fade-in-right">
                     <form class="encore-contact-form" id="encoreContactForm">
                         <h3 class="encore-form-title">Get Started Today</h3>
                     <div class="encore-form-group">
@@ -625,7 +709,7 @@
     </section>
 
     <!-- SEO Content Section -->
-    <section class="encore-seo-content" style="background: var(--encore-bg-secondary); padding: 4rem 0;">
+    <section class="encore-seo-content encore-scroll-reveal" style="background: var(--encore-bg-secondary); padding: 4rem 0;">
         <div class="encore-container">
             <div class="encore-section-header">
                 <h2 class="encore-section-title">Digital Services Provider - Website Development & Automation Solutions</h2>
@@ -664,7 +748,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="encore-footer">
+    <footer class="encore-footer encore-slide-up-rotate">
         <div class="encore-container">
             <div class="encore-footer-content">
                 <div class="encore-footer-brand">

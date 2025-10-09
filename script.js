@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCarousel();
     initializeModals();
     initializeFlowAnimations();
+    initializeScrollReveal();
+    initializeSearch();
 });
 
 // ========================================
@@ -64,6 +66,9 @@ function initializeNavigation() {
     const mobileToggle = document.getElementById('encoreMobileToggle');
     const navMenu = document.getElementById('encoreNavMenu');
     const navLinks = document.querySelectorAll('.encore-nav-link');
+    const header = document.querySelector('.encore-header');
+    const fixedLogo = document.querySelector('.encore-fixed-logo');
+    const mobileLogo = document.querySelector('.encore-mobile-logo');
     
     // Mobile menu toggle
     mobileToggle.addEventListener('click', function() {
@@ -87,8 +92,62 @@ function initializeNavigation() {
         }
     });
     
+    // Modern scroll-based navbar animations
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    
+    function updateNavbar() {
+        const scrollY = window.scrollY;
+        
+        // Add scrolled class for background change
+        if (scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Hide/show navbar and logo based on scroll direction
+        if (scrollY > lastScrollY && scrollY > 100) {
+            // Scrolling down - hide navbar and logo
+            header.classList.add('hidden');
+            header.classList.remove('visible');
+            if (fixedLogo) {
+                fixedLogo.classList.add('hidden');
+            }
+            if (mobileLogo) {
+                mobileLogo.classList.add('hidden');
+            }
+        } else {
+            // Scrolling up - show navbar and logo
+            header.classList.remove('hidden');
+            header.classList.add('visible');
+            if (fixedLogo) {
+                fixedLogo.classList.remove('hidden');
+            }
+            if (mobileLogo) {
+                mobileLogo.classList.remove('hidden');
+            }
+        }
+        
+        lastScrollY = scrollY;
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    }
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
     // Active navigation highlighting
     window.addEventListener('scroll', updateActiveNavigation);
+    
+    // Initialize navbar state
+    updateNavbar();
 }
 
 function updateActiveNavigation() {
@@ -2073,4 +2132,282 @@ function initializeComparisonToggle() {
             }
         });
     });
+}
+
+// ========================================
+// SCROLL REVEAL ANIMATIONS
+// ========================================
+
+function initializeScrollReveal() {
+    // Create intersection observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                
+                // For staggered items, add delay based on their position
+                if (entry.target.classList.contains('encore-stagger-item')) {
+                    const siblings = Array.from(entry.target.parentNode.children);
+                    const index = siblings.indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 0.1}s`;
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all elements with scroll reveal classes
+    const revealElements = document.querySelectorAll(`
+        .encore-scroll-reveal,
+        .encore-fade-in-left,
+        .encore-fade-in-right,
+        .encore-scale-up,
+        .encore-stagger-item,
+        .encore-slide-up-rotate,
+        .encore-bounce-in,
+        .encore-flip-in
+    `);
+
+    revealElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Special handling for hero section (reveal immediately)
+    const heroSection = document.querySelector('.encore-hero');
+    if (heroSection) {
+        heroSection.classList.add('revealed');
+    }
+}
+
+// ========================================
+// SEARCH FUNCTIONALITY
+// ========================================
+
+function initializeSearch() {
+    const searchToggle = document.getElementById('encoreSearchToggle');
+    const searchModal = document.getElementById('encoreSearchModal');
+    const searchOverlay = document.getElementById('encoreSearchOverlay');
+    const searchClose = document.getElementById('encoreSearchClose');
+    const searchInput = document.getElementById('encoreSearchInput');
+    const searchClear = document.getElementById('encoreSearchClear');
+    const searchSuggestions = document.getElementById('encoreSearchSuggestions');
+    const searchResults = document.getElementById('encoreSearchResults');
+    const searchNoResults = document.getElementById('encoreSearchNoResults');
+    const searchResultsList = document.getElementById('encoreSearchResultsList');
+    const searchResultsCount = document.getElementById('encoreSearchResultsCount');
+    const searchTags = document.querySelectorAll('.encore-search-tag');
+
+    // Search data - content to search through
+    const searchData = [
+        {
+            title: "Website UI/UX Development",
+            description: "Stunning, user-centered designs that captivate visitors and drive conversions. Modern interfaces with exceptional user experience and seamless interactions.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["website", "development", "UI", "UX", "design", "interface", "user experience"]
+        },
+        {
+            title: "CRM Automation",
+            description: "Intelligent customer relationship management systems that automatically track, organize, and nurture leads throughout the entire sales funnel.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["CRM", "automation", "customer", "relationship", "management", "leads", "sales"]
+        },
+        {
+            title: "Email Campaign Automation",
+            description: "Powerful email marketing automation that nurtures leads, engages customers, and drives conversions with personalized, targeted campaigns.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["email", "marketing", "automation", "campaigns", "leads", "conversions"]
+        },
+        {
+            title: "Calendar Booking System",
+            description: "Seamless appointment scheduling systems that automate bookings, send reminders, and integrate with your existing workflow.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["calendar", "booking", "appointment", "scheduling", "automation", "reminders"]
+        },
+        {
+            title: "Business System Automation",
+            description: "Smart workflows that eliminate repetitive tasks and automatically organize customer data. Streamline your processes and never miss a lead again.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["business", "automation", "workflow", "processes", "data", "organization"]
+        },
+        {
+            title: "Customer Experience Solutions",
+            description: "AI-powered communication tools and automated support systems that provide instant responses and personalized customer experiences.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["customer", "experience", "AI", "communication", "support", "automation"]
+        },
+        {
+            title: "Google Analytics Setup",
+            description: "Comprehensive website analytics setup and configuration to track visitor behavior, measure performance, and gain valuable insights for business growth.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["Google", "Analytics", "tracking", "performance", "insights", "data"]
+        },
+        {
+            title: "Professional Digital Services",
+            description: "Digital Encore is a growing provider of professional digital services, specializing in website development and automation solutions.",
+            type: "About",
+            url: "index.html",
+            keywords: ["professional", "digital", "services", "website", "development", "automation"]
+        },
+        {
+            title: "Why Choose Digital Encore",
+            description: "We don't just build websites – we create digital ecosystems that drive your business forward with professional image, efficiency, and customer-first approach.",
+            type: "About",
+            url: "why-choose-us.html",
+            keywords: ["why", "choose", "professional", "efficiency", "customer", "first", "scalability"]
+        },
+        {
+            title: "Get Free Consultation",
+            description: "Ready to transform your business? Let's discuss how we can help you achieve your goals and grow your business with our comprehensive services.",
+            type: "Contact",
+            url: "contact.html",
+            keywords: ["consultation", "free", "transform", "business", "goals", "contact"]
+        }
+    ];
+
+    // Open search modal
+    function openSearch() {
+        searchModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            searchInput.focus();
+        }, 300);
+    }
+
+    // Close search modal
+    function closeSearch() {
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+        searchInput.value = '';
+        showSuggestions();
+        hideClearButton();
+    }
+
+    // Show suggestions
+    function showSuggestions() {
+        searchSuggestions.style.display = 'block';
+        searchResults.style.display = 'none';
+        searchNoResults.style.display = 'none';
+    }
+
+    // Show results
+    function showResults(results) {
+        searchSuggestions.style.display = 'none';
+        searchResults.style.display = 'block';
+        searchNoResults.style.display = 'none';
+        
+        searchResultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
+        
+        searchResultsList.innerHTML = '';
+        results.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'encore-search-result-item';
+            resultItem.innerHTML = `
+                <div class="encore-search-result-title">${result.title}</div>
+                <div class="encore-search-result-description">${result.description}</div>
+                <span class="encore-search-result-type">${result.type}</span>
+            `;
+            
+            resultItem.addEventListener('click', () => {
+                window.location.href = result.url;
+                closeSearch();
+            });
+            
+            searchResultsList.appendChild(resultItem);
+        });
+    }
+
+    // Show no results
+    function showNoResults() {
+        searchSuggestions.style.display = 'none';
+        searchResults.style.display = 'none';
+        searchNoResults.style.display = 'block';
+    }
+
+    // Search function
+    function search(query) {
+        if (!query.trim()) {
+            showSuggestions();
+            return;
+        }
+
+        const results = searchData.filter(item => {
+            const searchText = (item.title + ' ' + item.description + ' ' + item.keywords.join(' ')).toLowerCase();
+            return searchText.includes(query.toLowerCase());
+        });
+
+        if (results.length > 0) {
+            showResults(results);
+        } else {
+            showNoResults();
+        }
+    }
+
+    // Show/hide clear button
+    function toggleClearButton() {
+        if (searchInput.value.trim()) {
+            searchClear.style.display = 'flex';
+        } else {
+            searchClear.style.display = 'none';
+        }
+    }
+
+    function hideClearButton() {
+        searchClear.style.display = 'none';
+    }
+
+    // Event listeners
+    searchToggle.addEventListener('click', openSearch);
+    searchOverlay.addEventListener('click', closeSearch);
+    searchClose.addEventListener('click', closeSearch);
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        showSuggestions();
+        hideClearButton();
+    });
+
+    // Search input events
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        search(query);
+        toggleClearButton();
+    });
+
+    // Search tag clicks
+    searchTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            const searchTerm = tag.getAttribute('data-search');
+            searchInput.value = searchTerm;
+            search(searchTerm);
+            toggleClearButton();
+        });
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Open search with Ctrl/Cmd + K
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            openSearch();
+        }
+        
+        // Close search with Escape
+        if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+            closeSearch();
+        }
+    });
+
+    // Initialize
+    showSuggestions();
 }
