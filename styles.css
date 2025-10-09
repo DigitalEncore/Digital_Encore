@@ -5205,6 +5205,98 @@ body {
     opacity: 1;
 }
 
+/* Make explore buttons always visible on mobile without covering images */
+@media (max-width: 768px) {
+    .encore-industry-overlay {
+        opacity: 0; /* Keep overlay hidden to preserve image visibility */
+        background: transparent; /* Remove colored background */
+    }
+    
+    /* Position explore button directly on the image without overlay */
+    .encore-industry-image {
+        position: relative;
+    }
+    
+    .encore-industry-image::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .encore-industry-card:active .encore-industry-image::after {
+        opacity: 1;
+    }
+    
+    .encore-explore-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--encore-primary-600);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        padding: var(--encore-space-2) var(--encore-space-3);
+        font-size: var(--encore-font-size-sm);
+        font-weight: var(--encore-font-weight-bold);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        animation: encore-mobile-pulse 2s ease-in-out infinite;
+        z-index: 5;
+    }
+    
+    .encore-explore-btn:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translate(-50%, -50%) translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        animation: none; /* Stop pulsing on hover */
+    }
+    
+    .encore-explore-btn:active {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    
+    /* Add a subtle pulse animation to draw attention */
+    @keyframes encore-mobile-pulse {
+        0%, 100% { 
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        50% { 
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+    }
+    
+    /* Add a clickable indicator to the entire card */
+    .encore-industry-card {
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .encore-industry-card::after {
+        content: 'Tap to explore';
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: var(--encore-font-size-xs);
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: 10;
+    }
+}
+
 .encore-explore-btn {
     background: var(--encore-bg-primary);
     color: var(--encore-text-primary);
@@ -5328,6 +5420,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 10;
 }
 
 .encore-modal-close:hover {
@@ -5335,6 +5429,62 @@ body {
     border-color: rgba(239, 68, 68, 0.4);
     color: #ef4444;
     transform: scale(1.1);
+}
+
+/* Mobile-specific modal close button */
+@media (max-width: 768px) {
+    .encore-modal-close {
+        width: 40px;
+        height: 40px;
+        font-size: var(--encore-font-size-lg);
+        background: rgba(239, 68, 68, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        position: fixed;
+        top: 120px; /* Position higher to avoid covering modal title */
+        right: 15px;
+        z-index: 1001;
+    }
+    
+    .encore-modal-close:hover {
+        background: rgba(239, 68, 68, 1);
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    
+    .encore-modal-close:active {
+        transform: scale(0.95);
+    }
+    
+    /* Add a mobile-specific close button in the modal header as well */
+    .encore-modal-header {
+        position: relative;
+        padding-right: 60px; /* Make room for the smaller fixed close button */
+    }
+    
+    /* Add a swipe-down gesture hint for mobile */
+    .encore-modal::before {
+        content: 'Swipe down or tap X to close';
+        position: fixed;
+        top: 130px; /* Position below the navigation bar and smaller close button */
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: var(--encore-font-size-xs);
+        z-index: 1000;
+        opacity: 0;
+        animation: encore-modal-hint 3s ease-in-out;
+        pointer-events: none;
+    }
+    
+    @keyframes encore-modal-hint {
+        0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+        20%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
 }
 
 .encore-modal-body {

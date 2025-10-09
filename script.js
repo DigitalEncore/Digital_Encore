@@ -1268,31 +1268,130 @@ function initializeCarousel() {
     
     if (!carousel) return;
     
+    // Check if we're on mobile (screen width <= 480px)
+    const isMobile = window.innerWidth <= 480;
+    
+    if (isMobile) {
+        // Mobile carousel - horizontal scroll implementation
+        initializeMobileCarousel(carousel);
+    } else {
+        // Desktop carousel - 3D rotation with hover pause
+        initializeDesktopCarousel(carousel);
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        const newIsMobile = window.innerWidth <= 480;
+        if (newIsMobile !== isMobile) {
+            // Reinitialize carousel if mobile/desktop state changed
+            initializeCarousel();
+        }
+    });
+}
+
+function initializeDesktopCarousel(carousel) {
+    // Remove any mobile-specific styles that might have been applied
+    carousel.style.animation = '';
+    carousel.style.transform = '';
+    carousel.style.display = '';
+    carousel.style.overflowX = '';
+    carousel.style.scrollSnapType = '';
+    carousel.style.gap = '';
+    carousel.style.padding = '';
+    carousel.style.width = '';
+    carousel.style.height = '';
+    carousel.style.transformStyle = '';
+    carousel.style.scrollbarWidth = '';
+    carousel.style.msOverflowStyle = '';
+    carousel.style.setProperty('-webkit-scrollbar', '');
+    
+    // Restore carousel items to default CSS positioning
+    const carouselItems = carousel.querySelectorAll('.encore-carousel-item');
+    carouselItems.forEach((item, index) => {
+        item.style.flex = '';
+        item.style.width = '';
+        item.style.height = '';
+        item.style.position = '';
+        item.style.transform = '';
+        item.style.scrollSnapAlign = '';
+    });
+    
+    // Remove any existing event listeners to prevent duplicates
+    carousel.removeEventListener('mouseenter', handleMouseEnter);
+    carousel.removeEventListener('mouseleave', handleMouseLeave);
+    
     // Pause auto-rotation on hover
-    carousel.addEventListener('mouseenter', function() {
+    function handleMouseEnter() {
         carousel.style.animationPlayState = 'paused';
-    });
+    }
     
-    carousel.addEventListener('mouseleave', function() {
+    function handleMouseLeave() {
         carousel.style.animationPlayState = 'running';
-    });
+    }
     
-    // Touch/swipe support for mobile
+    carousel.addEventListener('mouseenter', handleMouseEnter);
+    carousel.addEventListener('mouseleave', handleMouseLeave);
+}
+
+function initializeMobileCarousel(carousel) {
+    const carouselContainer = carousel.parentElement;
+    const carouselItems = carousel.querySelectorAll('.encore-carousel-item');
+    let currentIndex = 0;
     let startX = 0;
     let startY = 0;
     let isDragging = false;
+    let startScrollLeft = 0;
     
+    // Ensure carousel is in mobile mode
+    carousel.style.animation = 'none';
+    carousel.style.transform = 'none';
+    carousel.style.display = 'flex';
+    carousel.style.overflowX = 'auto';
+    carousel.style.scrollSnapType = 'x mandatory';
+    carousel.style.gap = 'var(--encore-space-4)';
+    carousel.style.padding = 'var(--encore-space-4) 0';
+    carousel.style.width = '100%';
+    carousel.style.height = 'auto';
+    carousel.style.transformStyle = 'flat';
+    carousel.style.scrollbarWidth = 'none';
+    carousel.style.msOverflowStyle = 'none';
+    
+    // Hide scrollbar for webkit browsers
+    carousel.style.setProperty('-webkit-scrollbar', 'display: none');
+    
+    // Set up carousel items for mobile
+    carouselItems.forEach((item, index) => {
+        item.style.flex = '0 0 280px';
+        item.style.width = '280px';
+        item.style.height = '350px';
+        item.style.position = 'relative';
+        item.style.transform = 'none';
+        item.style.scrollSnapAlign = 'center';
+    });
+    
+    // Touch/swipe support for mobile
     carousel.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
+        startScrollLeft = carousel.scrollLeft;
         isDragging = true;
-        carousel.style.animationPlayState = 'paused';
-    });
+        carousel.style.scrollBehavior = 'auto';
+    }, { passive: true });
     
     carousel.addEventListener('touchmove', function(e) {
         if (!isDragging) return;
-        e.preventDefault();
-    });
+        
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = startX - currentX;
+        const diffY = startY - currentY;
+        
+        // Only prevent default if it's a horizontal swipe and significant movement
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+            e.preventDefault();
+            carousel.scrollLeft = startScrollLeft + diffX;
+        }
+    }, { passive: false });
     
     carousel.addEventListener('touchend', function(e) {
         if (!isDragging) return;
@@ -1305,14 +1404,93 @@ function initializeCarousel() {
         
         // Only trigger if horizontal swipe is more significant than vertical
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            const itemWidth = 280 + 16; // 280px width + 16px gap
+            const scrollAmount = itemWidth;
+            
             if (diffX > 0) {
-                nextBtn.click();
+                // Swipe left - go to next item
+                carousel.scrollLeft += scrollAmount;
             } else {
-                prevBtn.click();
+                // Swipe right - go to previous item
+                carousel.scrollLeft -= scrollAmount;
             }
         }
         
-        carousel.style.animationPlayState = 'running';
+        carousel.style.scrollBehavior = 'smooth';
+    }, { passive: true });
+    
+    // Add scroll snap behavior
+    carousel.addEventListener('scroll', function() {
+        const itemWidth = 280 + 16; // 280px width + 16px gap
+        const scrollLeft = carousel.scrollLeft;
+        const newIndex = Math.round(scrollLeft / itemWidth);
+        
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < carouselItems.length) {
+            currentIndex = newIndex;
+        }
+    });
+    
+    // Add mouse support for desktop users on mobile view
+    let mouseStartX = 0;
+    let mouseStartY = 0;
+    let isMouseDragging = false;
+    let mouseStartScrollLeft = 0;
+    
+    carousel.addEventListener('mousedown', function(e) {
+        mouseStartX = e.clientX;
+        mouseStartY = e.clientY;
+        mouseStartScrollLeft = carousel.scrollLeft;
+        isMouseDragging = true;
+        carousel.style.scrollBehavior = 'auto';
+        e.preventDefault();
+    });
+    
+    carousel.addEventListener('mousemove', function(e) {
+        if (!isMouseDragging) return;
+        
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+        const diffX = mouseStartX - currentX;
+        const diffY = mouseStartY - currentY;
+        
+        // Only prevent default if it's a horizontal drag
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+            e.preventDefault();
+            carousel.scrollLeft = mouseStartScrollLeft + diffX;
+        }
+    });
+    
+    carousel.addEventListener('mouseup', function(e) {
+        if (!isMouseDragging) return;
+        isMouseDragging = false;
+        
+        const endX = e.clientX;
+        const endY = e.clientY;
+        const diffX = mouseStartX - endX;
+        const diffY = mouseStartY - endY;
+        
+        // Only trigger if horizontal drag is more significant than vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            const itemWidth = 280 + 16; // 280px width + 16px gap
+            const scrollAmount = itemWidth;
+            
+            if (diffX > 0) {
+                // Drag left - go to next item
+                carousel.scrollLeft += scrollAmount;
+            } else {
+                // Drag right - go to previous item
+                carousel.scrollLeft -= scrollAmount;
+            }
+        }
+        
+        carousel.style.scrollBehavior = 'smooth';
+    });
+    
+    // Prevent text selection during drag
+    carousel.addEventListener('selectstart', function(e) {
+        if (isMouseDragging) {
+            e.preventDefault();
+        }
     });
 }
 
@@ -1359,7 +1537,7 @@ function initializeModals() {
 
         // Auto-reveal sequence from start to end (desktop only)
         function startAutoReveal() {
-            // Animate workflow steps
+            // Animate workflow steps with slower, more gradual timing
             workflowSteps.forEach((step, index) => {
                 setTimeout(() => {
                     step.classList.add('animate');
@@ -1369,7 +1547,7 @@ function initializeModals() {
                         behavior: 'smooth', 
                         block: 'center' 
                     });
-                }, index * 800); // 800ms delay between each step
+                }, index * 1200); // Increased from 800ms to 1200ms for slower reveal
             });
 
             // Animate results section after all workflow steps
@@ -1380,7 +1558,7 @@ function initializeModals() {
                         behavior: 'smooth', 
                         block: 'center' 
                     });
-                }, workflowSteps.length * 800 + 400); // After all steps + small delay
+                }, workflowSteps.length * 1200 + 600); // Increased delay after all steps
             }
 
             // Animate CTA section after results
@@ -1391,7 +1569,7 @@ function initializeModals() {
                         behavior: 'smooth', 
                         block: 'center' 
                     });
-                }, workflowSteps.length * 800 + 1200); // After results section
+                }, workflowSteps.length * 1200 + 1500); // Increased delay after results section
             }
         }
 
@@ -1487,6 +1665,24 @@ function initializeModals() {
                     openModal(modalId);
                 }
             });
+            
+            // Add touch support for mobile devices
+            card.addEventListener('touchend', function(e) {
+                // Check if this is a quick tap (not a swipe)
+                const touchDuration = Date.now() - (card._touchStartTime || 0);
+                if (touchDuration < 300) { // Quick tap within 300ms
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const modalId = image.getAttribute('data-modal');
+                    console.log('Card touched, opening modal:', modalId);
+                    openModal(modalId);
+                }
+            }, { passive: false });
+            
+            // Track touch start time
+            card.addEventListener('touchstart', function(e) {
+                card._touchStartTime = Date.now();
+            }, { passive: true });
         }
     });
     
@@ -1507,6 +1703,9 @@ function initializeModals() {
                 closeModal(modalId);
             }
         });
+        
+        // Add mobile swipe-down gesture to close modal
+        addMobileSwipeToClose(modal);
     });
     
     // Close modal with Escape key
@@ -1539,6 +1738,67 @@ function initializeModals() {
     modals.forEach(modal => {
         observer.observe(modal, { attributes: true });
     });
+}
+
+// Add mobile swipe-down gesture to close modal
+function addMobileSwipeToClose(modal) {
+    let startY = 0;
+    let startX = 0;
+    let isDragging = false;
+    let startTime = 0;
+    
+    modal.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+        startTime = Date.now();
+        isDragging = true;
+    }, { passive: true });
+    
+    modal.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        const currentY = e.touches[0].clientY;
+        const currentX = e.touches[0].clientX;
+        const diffY = currentY - startY;
+        const diffX = currentX - startX;
+        
+        // Only handle vertical swipes that start from the top
+        if (startY < 100 && Math.abs(diffY) > Math.abs(diffX) && diffY > 0) {
+            // Add visual feedback by moving the modal down slightly
+            const modalContent = modal.querySelector('.encore-modal-content');
+            if (modalContent && diffY < 200) {
+                modalContent.style.transform = `translateY(${diffY * 0.3}px)`;
+                modalContent.style.opacity = Math.max(0.3, 1 - (diffY / 200));
+            }
+        }
+    }, { passive: true });
+    
+    modal.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endY = e.changedTouches[0].clientY;
+        const endX = e.changedTouches[0].clientX;
+        const diffY = endY - startY;
+        const diffX = endX - startX;
+        const duration = Date.now() - startTime;
+        
+        // Reset modal position
+        const modalContent = modal.querySelector('.encore-modal-content');
+        if (modalContent) {
+            modalContent.style.transform = '';
+            modalContent.style.opacity = '';
+        }
+        
+        // Close modal if swipe down is significant and fast enough
+        if (startY < 100 && 
+            Math.abs(diffY) > Math.abs(diffX) && 
+            diffY > 100 && 
+            duration < 500) {
+            const modalId = modal.id;
+            closeModal(modalId);
+        }
+    }, { passive: true });
 }
 
 // ========================================
@@ -1619,7 +1879,7 @@ function initializeFlowAnimations() {
         sections.forEach((section, index) => {
             setTimeout(() => {
                 section.classList.add('animate');
-            }, index * 600);
+            }, index * 900); // Slowed down from 600ms to 900ms
         });
         
         if (connector) {
@@ -1645,7 +1905,7 @@ function initializeFlowAnimations() {
         steps.forEach((step, index) => {
             setTimeout(() => {
                 step.classList.add('animate');
-            }, index * 500);
+            }, index * 750); // Slowed down from 500ms to 750ms
         });
         
         if (benefits) {
@@ -1665,7 +1925,7 @@ function initializeFlowAnimations() {
         nodes.forEach((node, index) => {
             setTimeout(() => {
                 node.classList.add('animate');
-            }, index * 400);
+            }, index * 600); // Slowed down from 400ms to 600ms
         });
         
         connections.forEach((connection, index) => {
@@ -1692,7 +1952,7 @@ function initializeFlowAnimations() {
         panels.forEach((panel, index) => {
             setTimeout(() => {
                 panel.classList.add('animate');
-            }, index * 400);
+            }, index * 600); // Slowed down from 400ms to 600ms
         });
         
         if (arrow) {
@@ -1726,7 +1986,7 @@ function initializeFlowAnimations() {
         chapters.forEach((chapter, index) => {
             setTimeout(() => {
                 chapter.classList.add('animate');
-            }, 400 + (index * 600));
+            }, 600 + (index * 900)); // Slowed down from 400 + (index * 600) to 600 + (index * 900)
         });
         
         if (cta) {
@@ -1751,7 +2011,7 @@ function initializeFlowAnimations() {
         flowSteps.forEach((step, index) => {
             setTimeout(() => {
                 step.classList.add('animate');
-            }, index * 400);
+            }, index * 600); // Slowed down from 400ms to 600ms
         });
         
         flowArrows.forEach((arrow, index) => {
