@@ -40,6 +40,17 @@
     <!-- End Meta Pixel Code -->
 </head>
 <body>
+    <!-- Follow Us Section -->
+    <div class="encore-follow-us">
+        <div class="encore-follow-us-content">
+            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-follow-us-link">
+                <span class="encore-follow-us-label">Fa.</span>
+            </a>
+            <div class="encore-follow-us-line"></div>
+            <span class="encore-follow-us-text">Follow Us</span>
+        </div>
+    </div>
+
     <!-- Fixed Logo in Top Left Corner -->
     <div class="encore-fixed-logo">
         <a href="/" class="encore-logo-fixed">
@@ -53,9 +64,11 @@
             <div class="encore-nav-container">
                 <div class="encore-nav-spacer"></div>
                 
-                <a href="/" class="encore-mobile-logo">
-                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
-                </a>
+                <div class="encore-mobile-logo">
+                    <a href="/" class="encore-logo-mobile">
+                        <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
+                    </a>
+                </div>
                 
                 <div class="encore-nav-menu" id="encoreNavMenu">
                     <a href="/" class="encore-nav-link">Home</a>
@@ -66,6 +79,9 @@
                 </div>
                 
                 <div class="encore-nav-controls">
+                    <button class="encore-search-toggle" id="encoreSearchToggle" aria-label="Search">
+                        <i class="fas fa-search encore-search-icon"></i>
+                    </button>
                     <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
                         <i class="fas fa-moon encore-theme-icon"></i>
                     </button>
@@ -79,11 +95,59 @@
         </nav>
     </header>
 
+    <!-- Search Modal -->
+    <div class="encore-search-modal" id="encoreSearchModal">
+        <div class="encore-search-overlay" id="encoreSearchOverlay"></div>
+        <div class="encore-search-container">
+            <div class="encore-search-header">
+                <div class="encore-search-input-container">
+                    <i class="fas fa-search encore-search-input-icon"></i>
+                    <input type="text" class="encore-search-input" id="encoreSearchInput" placeholder="Search services, features, or topics...">
+                    <button class="encore-search-clear" id="encoreSearchClear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="encore-search-close" id="encoreSearchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="encore-search-content">
+                <div class="encore-search-suggestions" id="encoreSearchSuggestions">
+                    <div class="encore-search-suggestion-category">
+                        <h4>Popular Searches</h4>
+                        <div class="encore-search-suggestion-tags">
+                            <span class="encore-search-tag" data-search="website development">Website Development</span>
+                            <span class="encore-search-tag" data-search="automation">Business Automation</span>
+                            <span class="encore-search-tag" data-search="crm">CRM Setup</span>
+                            <span class="encore-search-tag" data-search="email marketing">Email Marketing</span>
+                            <span class="encore-search-tag" data-search="analytics">Google Analytics</span>
+                            <span class="encore-search-tag" data-search="booking system">Booking System</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="encore-search-results" id="encoreSearchResults" style="display: none;">
+                    <div class="encore-search-results-header">
+                        <h4>Search Results</h4>
+                        <span class="encore-search-results-count" id="encoreSearchResultsCount"></span>
+                    </div>
+                    <div class="encore-search-results-list" id="encoreSearchResultsList"></div>
+                </div>
+                <div class="encore-search-no-results" id="encoreSearchNoResults" style="display: none;">
+                    <div class="encore-search-no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>No results found</h4>
+                    <p>Try searching for something else or browse our popular topics above.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Services Hero Section -->
     <section class="encore-services-hero">
         <div class="encore-floating-shape"></div>
         <div class="encore-container">
-            <div class="encore-section-header encore-bounce-in">
+            <div class="encore-section-header">
                 <h1 class="encore-section-title">Our Services</h1>
                 <p class="encore-section-description">
                     Comprehensive solutions designed to elevate your business and enhance customer experiences
@@ -98,146 +162,526 @@
     <!-- Services Section -->
     <section class="encore-services">
         <div class="encore-container">
-            <div class="encore-services-grid">
+            <div class="encore-services-detailed">
                 <!-- Website UI/UX Development -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-left">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Website UI/UX Development</h3>
+                            <p class="encore-service-detailed-description">
+                                Stunning, user-centered designs that captivate visitors and drive conversions. 
+                                Modern interfaces with exceptional user experience and seamless interactions.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Website UI/UX Development</h3>
-                    <p class="encore-service-description">
-                        Stunning, user-centered designs that captivate visitors and drive conversions. 
-                        Modern interfaces with exceptional user experience and seamless interactions.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Custom UI/UX design & development</li>
-                        <li>Mobile-first responsive layouts</li>
-                        <li>Interactive animations & micro-interactions</li>
-                        <li>Performance optimization & SEO</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Custom UI/UX design & development</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Mobile-first responsive layouts</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Interactive animations & micro-interactions</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Performance optimization & SEO</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- CRM Automation -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-right">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">CRM Automation with integration to website</h3>
+                            <p class="encore-service-detailed-description">
+                                Intelligent customer relationship management systems that automatically track, 
+                                organize, and nurture leads throughout the entire sales funnel.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">CRM Automation with integration to website</h3>
-                    <p class="encore-service-description">
-                        Intelligent customer relationship management systems that automatically track, 
-                        organize, and nurture leads throughout the entire sales funnel.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Lead capture & qualification</li>
-                        <li>Automated follow-up sequences</li>
-                        <li>Customer data organization</li>
-                        <li>Sales pipeline management</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Lead capture & qualification</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Automated follow-up sequences</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Customer data organization</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Sales pipeline management</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Email Campaign Automation -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-left">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Email Campaign Automation</h3>
+                            <p class="encore-service-detailed-description">
+                                Powerful email marketing automation that nurtures leads, engages customers, 
+                                and drives conversions with personalized, targeted campaigns.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Email Campaign Automation</h3>
-                    <p class="encore-service-description">
-                        Powerful email marketing automation that nurtures leads, engages customers, 
-                        and drives conversions with personalized, targeted campaigns.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Automated email sequences</li>
-                        <li>Personalized content delivery</li>
-                        <li>Behavioral trigger campaigns</li>
-                        <li>Analytics & performance tracking</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Automated email sequences</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Personalized content delivery</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Behavioral trigger campaigns</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Analytics & performance tracking</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Calendar Booking System -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-right">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Calendar Booking System with integration to website</h3>
+                            <p class="encore-service-detailed-description">
+                                Seamless appointment scheduling systems that automate bookings, 
+                                send reminders, and integrate with your existing workflow.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Calendar Booking System with integration to website</h3>
-                    <p class="encore-service-description">
-                        Seamless appointment scheduling systems that automate bookings, 
-                        send reminders, and integrate with your existing workflow.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Online appointment scheduling</li>
-                        <li>Automated reminders & confirmations</li>
-                        <li>Calendar integration & sync</li>
-                        <li>Payment processing integration</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Online appointment scheduling</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h6v-2H4v2zM4 11h6V9H4v2zM4 7h6V5H4v2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Automated reminders & confirmations</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Calendar integration & sync</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Payment processing integration</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Business System Automation -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-left">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Business System Automation including wide range of apps</h3>
+                            <p class="encore-service-detailed-description">
+                                Smart workflows that eliminate repetitive tasks and automatically organize customer data. 
+                                Streamline your processes and never miss a lead again.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Business System Automation including wide range of apps</h3>
-                    <p class="encore-service-description">
-                        Smart workflows that eliminate repetitive tasks and automatically organize customer data. 
-                        Streamline your processes and never miss a lead again.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Automated form processing</li>
-                        <li>Instant team notifications</li>
-                        <li>Data organization & tracking</li>
-                        <li>Workflow optimization</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Automated form processing</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h6v-2H4v2zM4 11h6V9H4v2zM4 7h6V5H4v2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Instant team notifications</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Data organization & tracking</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Workflow optimization</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Customer Experience Solutions -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-right">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Customer Experience Solutions</h3>
+                            <p class="encore-service-detailed-description">
+                                AI-powered communication tools and automated support systems that provide instant responses 
+                                and personalized customer experiences.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Customer Experience Solutions</h3>
-                    <p class="encore-service-description">
-                        AI-powered communication tools and automated support systems that provide instant responses 
-                        and personalized customer experiences.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>AI-powered chat assistance</li>
-                        <li>Automated support tickets</li>
-                        <li>Customer profile management</li>
-                        <li>24/7 intelligent responses</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">AI-powered chat assistance</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Automated support tickets</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Customer profile management</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">24/7 intelligent responses</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Google Analytics Setup -->
-                <div class="encore-service-card encore-stagger-item">
-                    <div class="encore-service-icon">
-                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+                <div class="encore-service-detailed-card encore-fade-in-left">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Google Analytics Setup for Website</h3>
+                            <p class="encore-service-detailed-description">
+                                Comprehensive website analytics setup and configuration to track visitor behavior, 
+                                measure performance, and gain valuable insights for business growth.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="encore-service-title">Google Analytics Setup for Website</h3>
-                    <p class="encore-service-description">
-                        Comprehensive website analytics setup and configuration to track visitor behavior, 
-                        measure performance, and gain valuable insights for business growth.
-                    </p>
-                    <ul class="encore-service-features">
-                        <li>Google Analytics 4 implementation</li>
-                        <li>Custom event tracking setup</li>
-                        <li>Conversion goal configuration</li>
-                        <li>Performance monitoring dashboard</li>
-                    </ul>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Google Analytics 4 implementation</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Custom event tracking setup</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Conversion goal configuration</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Performance monitoring dashboard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile App Development -->
+                <div class="encore-service-detailed-card encore-fade-in-right">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Mobile App Development</h3>
+                            <p class="encore-service-detailed-description">
+                                Custom mobile applications for iOS and Android that provide seamless user experiences, 
+                                native performance, and powerful features tailored to your business needs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">iOS & Android native development</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Cross-platform app solutions</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">App store optimization & deployment</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h6v-2H4v2zM4 11h6V9H4v2zM4 7h6V5H4v2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Push notifications & real-time features</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-commerce Systems -->
+                <div class="encore-service-detailed-card encore-fade-in-left">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">E-commerce / Online Store Systems</h3>
+                            <p class="encore-service-detailed-description">
+                                Complete online store solutions with secure payment processing, inventory management, 
+                                order tracking, and customer management systems for seamless e-commerce operations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Secure payment gateway integration</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Inventory & order management</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Customer account & profile systems</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Shipping & tax calculation automation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Dashboards & CRM Systems -->
+                <div class="encore-service-detailed-card encore-fade-in-right">
+                    <div class="encore-service-detailed-header">
+                        <div class="encore-service-detailed-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h2a2 2 0 002-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-service-detailed-info">
+                            <h3 class="encore-service-detailed-title">Admin Dashboards & CRM Systems</h3>
+                            <p class="encore-service-detailed-description">
+                                Comprehensive admin dashboards and customer relationship management systems that provide 
+                                real-time insights, data visualization, and powerful tools for business management.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="encore-service-detailed-features">
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Real-time data visualization & analytics</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Customer relationship management tools</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Sales pipeline & lead tracking</span>
+                        </div>
+                        <div class="encore-feature-item encore-stagger-item">
+                            <div class="encore-feature-icon">
+                                <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                </svg>
+                            </div>
+                            <span class="encore-feature-text">Custom reporting & business intelligence</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,7 +698,7 @@
         <div class="encore-floating-element"></div>
         
         <div class="encore-container">
-            <div class="encore-section-header encore-fade-in-left">
+            <div class="encore-section-header">
                 <h2 class="encore-section-title">How It Works</h2>
                 <p class="encore-section-description">
                     See how our services transform businesses across different industries with automated systems and professional websites
@@ -1779,7 +2223,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="encore-footer encore-slide-up-rotate">
+    <footer class="encore-footer">
         <div class="encore-container">
             <div class="encore-footer-content">
                 <div class="encore-footer-brand">

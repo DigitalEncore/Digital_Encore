@@ -44,6 +44,17 @@
     <!-- End Meta Pixel Code -->
 </head>
 <body>
+    <!-- Follow Us Section -->
+    <div class="encore-follow-us">
+        <div class="encore-follow-us-content">
+            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-follow-us-link">
+                <span class="encore-follow-us-label">Fa.</span>
+            </a>
+            <div class="encore-follow-us-line"></div>
+            <span class="encore-follow-us-text">Follow Us</span>
+        </div>
+    </div>
+
     <!-- Fixed Logo in Top Left Corner -->
     <div class="encore-fixed-logo">
         <a href="/" class="encore-logo-fixed">
@@ -57,9 +68,11 @@
             <div class="encore-nav-container">
                 <div class="encore-nav-spacer"></div>
                 
-                <a href="/" class="encore-mobile-logo">
-                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
-                </a>
+                <div class="encore-mobile-logo">
+                    <a href="/" class="encore-logo-mobile">
+                        <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
+                    </a>
+                </div>
                 
                 <div class="encore-nav-menu" id="encoreNavMenu">
                     <a href="/" class="encore-nav-link">Home</a>
@@ -70,6 +83,9 @@
                 </div>
                 
                 <div class="encore-nav-controls">
+                    <button class="encore-search-toggle" id="encoreSearchToggle" aria-label="Search">
+                        <i class="fas fa-search encore-search-icon"></i>
+                    </button>
                     <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
                         <i class="fas fa-moon encore-theme-icon"></i>
                     </button>
@@ -83,11 +99,59 @@
         </nav>
     </header>
 
+    <!-- Search Modal -->
+    <div class="encore-search-modal" id="encoreSearchModal">
+        <div class="encore-search-overlay" id="encoreSearchOverlay"></div>
+        <div class="encore-search-container">
+            <div class="encore-search-header">
+                <div class="encore-search-input-container">
+                    <i class="fas fa-search encore-search-input-icon"></i>
+                    <input type="text" class="encore-search-input" id="encoreSearchInput" placeholder="Search services, features, or topics...">
+                    <button class="encore-search-clear" id="encoreSearchClear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="encore-search-close" id="encoreSearchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="encore-search-content">
+                <div class="encore-search-suggestions" id="encoreSearchSuggestions">
+                    <div class="encore-search-suggestion-category">
+                        <h4>Popular Searches</h4>
+                        <div class="encore-search-suggestion-tags">
+                            <span class="encore-search-tag" data-search="website development">Website Development</span>
+                            <span class="encore-search-tag" data-search="automation">Business Automation</span>
+                            <span class="encore-search-tag" data-search="crm">CRM Setup</span>
+                            <span class="encore-search-tag" data-search="email marketing">Email Marketing</span>
+                            <span class="encore-search-tag" data-search="analytics">Google Analytics</span>
+                            <span class="encore-search-tag" data-search="booking system">Booking System</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="encore-search-results" id="encoreSearchResults" style="display: none;">
+                    <div class="encore-search-results-header">
+                        <h4>Search Results</h4>
+                        <span class="encore-search-results-count" id="encoreSearchResultsCount"></span>
+                    </div>
+                    <div class="encore-search-results-list" id="encoreSearchResultsList"></div>
+                </div>
+                <div class="encore-search-no-results" id="encoreSearchNoResults" style="display: none;">
+                    <div class="encore-search-no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>No results found</h4>
+                    <p>Try searching for something else or browse our popular topics above.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Thank You Hero Section -->
     <section class="encore-thank-you-hero">
         <div class="encore-floating-shape"></div>
         <div class="encore-container">
-            <div class="encore-thank-you-content encore-bounce-in">
+            <div class="encore-thank-you-content">
                 <div class="encore-thank-you-icon">
                     <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -202,7 +266,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="encore-footer encore-slide-up-rotate">
+    <footer class="encore-footer">
         <div class="encore-container">
             <div class="encore-footer-content">
                 <div class="encore-footer-brand">

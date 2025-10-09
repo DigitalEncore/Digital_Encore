@@ -1407,80 +1407,101 @@ function initializeMobileCarousel(carousel) {
     carousel.style.display = 'flex';
     carousel.style.overflowX = 'auto';
     carousel.style.scrollSnapType = 'x mandatory';
-    carousel.style.gap = 'var(--encore-space-4)';
-    carousel.style.padding = 'var(--encore-space-4) 0';
+    carousel.style.gap = 'var(--encore-space-6)';
+    carousel.style.padding = 'var(--encore-space-6) var(--encore-space-4)';
     carousel.style.width = '100%';
     carousel.style.height = 'auto';
     carousel.style.transformStyle = 'flat';
     carousel.style.scrollbarWidth = 'none';
     carousel.style.msOverflowStyle = 'none';
+    carousel.style.scrollBehavior = 'smooth';
+    carousel.style.webkitOverflowScrolling = 'touch';
     
     // Hide scrollbar for webkit browsers
     carousel.style.setProperty('-webkit-scrollbar', 'display: none');
     
     // Set up carousel items for mobile
     carouselItems.forEach((item, index) => {
-        item.style.flex = '0 0 280px';
-        item.style.width = '280px';
-        item.style.height = '350px';
+        item.style.flex = '0 0 300px';
+        item.style.width = '300px';
+        item.style.height = '380px';
         item.style.position = 'relative';
         item.style.transform = 'none';
         item.style.scrollSnapAlign = 'center';
     });
     
-    // Touch/swipe support for mobile
+    // Enhanced touch/swipe support for mobile
+    let hasMoved = false;
+    let startTime = 0;
+    
     carousel.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         startScrollLeft = carousel.scrollLeft;
-        isDragging = true;
+        startTime = Date.now();
+        isDragging = false;
+        hasMoved = false;
         carousel.style.scrollBehavior = 'auto';
     }, { passive: true });
     
     carousel.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
+        if (!startX || !startY) return;
         
         const currentX = e.touches[0].clientX;
         const currentY = e.touches[0].clientY;
         const diffX = startX - currentX;
         const diffY = startY - currentY;
         
-        // Only prevent default if it's a horizontal swipe and significant movement
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+        // Mark as moved if there's significant movement
+        if (Math.abs(diffX) > 5 || Math.abs(diffY) > 5) {
+            hasMoved = true;
+        }
+        
+        // Only prevent default if it's a clear horizontal swipe
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 15) {
+            isDragging = true;
             e.preventDefault();
             carousel.scrollLeft = startScrollLeft + diffX;
         }
     }, { passive: false });
     
     carousel.addEventListener('touchend', function(e) {
-        if (!isDragging) return;
-        isDragging = false;
+        const endTime = Date.now();
+        const duration = endTime - startTime;
         
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY;
-        const diffX = startX - endX;
-        const diffY = startY - endY;
-        
-        // Only trigger if horizontal swipe is more significant than vertical
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-            const itemWidth = 280 + 16; // 280px width + 16px gap
-            const scrollAmount = itemWidth;
+        if (isDragging) {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
             
-            if (diffX > 0) {
-                // Swipe left - go to next item
-                carousel.scrollLeft += scrollAmount;
-            } else {
-                // Swipe right - go to previous item
-                carousel.scrollLeft -= scrollAmount;
+            // Only trigger if horizontal swipe is more significant than vertical
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                const itemWidth = 300 + 24; // 300px width + 24px gap
+                const scrollAmount = itemWidth;
+                
+                if (diffX > 0) {
+                    // Swipe left - go to next item
+                    carousel.scrollLeft += scrollAmount;
+                } else {
+                    // Swipe right - go to previous item
+                    carousel.scrollLeft -= scrollAmount;
+                }
             }
         }
         
+        // Reset values
+        isDragging = false;
+        hasMoved = false;
+        startX = 0;
+        startY = 0;
+        startTime = 0;
         carousel.style.scrollBehavior = 'smooth';
     }, { passive: true });
     
     // Add scroll snap behavior
     carousel.addEventListener('scroll', function() {
-        const itemWidth = 280 + 16; // 280px width + 16px gap
+        const itemWidth = 300 + 24; // 300px width + 24px gap
         const scrollLeft = carousel.scrollLeft;
         const newIndex = Math.round(scrollLeft / itemWidth);
         
@@ -1725,23 +1746,49 @@ function initializeModals() {
                 }
             });
             
-            // Add touch support for mobile devices
+            // Enhanced touch support for mobile devices
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchMoved = false;
+            
+            card.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchMoved = false;
+                card._touchStartTime = Date.now();
+            }, { passive: true });
+            
+            card.addEventListener('touchmove', function(e) {
+                if (!touchStartX || !touchStartY) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(touchStartX - currentX);
+                const diffY = Math.abs(touchStartY - currentY);
+                
+                // Mark as moved if there's significant movement
+                if (diffX > 10 || diffY > 10) {
+                    touchMoved = true;
+                }
+            }, { passive: true });
+            
             card.addEventListener('touchend', function(e) {
-                // Check if this is a quick tap (not a swipe)
                 const touchDuration = Date.now() - (card._touchStartTime || 0);
-                if (touchDuration < 300) { // Quick tap within 300ms
+                
+                // Only trigger modal if it's a quick tap and no significant movement
+                if (touchDuration < 300 && !touchMoved) {
                     e.preventDefault();
                     e.stopPropagation();
                     const modalId = image.getAttribute('data-modal');
-                    console.log('Card touched, opening modal:', modalId);
+                    console.log('Card tapped (not swiped), opening modal:', modalId);
                     openModal(modalId);
                 }
+                
+                // Reset values
+                touchStartX = 0;
+                touchStartY = 0;
+                touchMoved = false;
             }, { passive: false });
-            
-            // Track touch start time
-            card.addEventListener('touchstart', function(e) {
-                card._touchStartTime = Date.now();
-            }, { passive: true });
         }
     });
     
@@ -2251,6 +2298,27 @@ function initializeSearch() {
             type: "Service",
             url: "services.html",
             keywords: ["Google", "Analytics", "tracking", "performance", "insights", "data"]
+        },
+        {
+            title: "Mobile App Development",
+            description: "Custom mobile applications for iOS and Android that provide seamless user experiences, native performance, and powerful features tailored to your business needs.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["mobile", "app", "development", "iOS", "Android", "native", "cross-platform"]
+        },
+        {
+            title: "E-commerce / Online Store Systems",
+            description: "Complete online store solutions with secure payment processing, inventory management, order tracking, and customer management systems for seamless e-commerce operations.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["e-commerce", "online", "store", "payment", "inventory", "shopping", "cart"]
+        },
+        {
+            title: "Admin Dashboards & CRM Systems",
+            description: "Comprehensive admin dashboards and customer relationship management systems that provide real-time insights, data visualization, and powerful tools for business management.",
+            type: "Service",
+            url: "services.html",
+            keywords: ["admin", "dashboard", "CRM", "management", "analytics", "data", "visualization"]
         },
         {
             title: "Professional Digital Services",

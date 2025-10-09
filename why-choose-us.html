@@ -40,6 +40,17 @@
     <!-- End Meta Pixel Code -->
 </head>
 <body>
+    <!-- Follow Us Section -->
+    <div class="encore-follow-us">
+        <div class="encore-follow-us-content">
+            <a href="https://facebook.com/profile.php?id=61581463806154" target="_blank" rel="noopener noreferrer" class="encore-follow-us-link">
+                <span class="encore-follow-us-label">Fa.</span>
+            </a>
+            <div class="encore-follow-us-line"></div>
+            <span class="encore-follow-us-text">Follow Us</span>
+        </div>
+    </div>
+
     <!-- Fixed Logo in Top Left Corner -->
     <div class="encore-fixed-logo">
         <a href="/" class="encore-logo-fixed">
@@ -53,9 +64,11 @@
             <div class="encore-nav-container">
                 <div class="encore-nav-spacer"></div>
                 
-                <a href="/" class="encore-mobile-logo">
-                    <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
-                </a>
+                <div class="encore-mobile-logo">
+                    <a href="/" class="encore-logo-mobile">
+                        <img src="Files/Digital Encore.png" alt="Digital Encore Logo" class="encore-mobile-logo-img">
+                    </a>
+                </div>
                 
                 <div class="encore-nav-menu" id="encoreNavMenu">
                     <a href="/" class="encore-nav-link">Home</a>
@@ -66,6 +79,9 @@
                 </div>
                 
                 <div class="encore-nav-controls">
+                    <button class="encore-search-toggle" id="encoreSearchToggle" aria-label="Search">
+                        <i class="fas fa-search encore-search-icon"></i>
+                    </button>
                     <button class="encore-theme-toggle" id="encoreThemeToggle" aria-label="Toggle theme">
                         <i class="fas fa-moon encore-theme-icon"></i>
                     </button>
@@ -79,11 +95,59 @@
         </nav>
     </header>
 
+    <!-- Search Modal -->
+    <div class="encore-search-modal" id="encoreSearchModal">
+        <div class="encore-search-overlay" id="encoreSearchOverlay"></div>
+        <div class="encore-search-container">
+            <div class="encore-search-header">
+                <div class="encore-search-input-container">
+                    <i class="fas fa-search encore-search-input-icon"></i>
+                    <input type="text" class="encore-search-input" id="encoreSearchInput" placeholder="Search services, features, or topics...">
+                    <button class="encore-search-clear" id="encoreSearchClear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="encore-search-close" id="encoreSearchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="encore-search-content">
+                <div class="encore-search-suggestions" id="encoreSearchSuggestions">
+                    <div class="encore-search-suggestion-category">
+                        <h4>Popular Searches</h4>
+                        <div class="encore-search-suggestion-tags">
+                            <span class="encore-search-tag" data-search="website development">Website Development</span>
+                            <span class="encore-search-tag" data-search="automation">Business Automation</span>
+                            <span class="encore-search-tag" data-search="crm">CRM Setup</span>
+                            <span class="encore-search-tag" data-search="email marketing">Email Marketing</span>
+                            <span class="encore-search-tag" data-search="analytics">Google Analytics</span>
+                            <span class="encore-search-tag" data-search="booking system">Booking System</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="encore-search-results" id="encoreSearchResults" style="display: none;">
+                    <div class="encore-search-results-header">
+                        <h4>Search Results</h4>
+                        <span class="encore-search-results-count" id="encoreSearchResultsCount"></span>
+                    </div>
+                    <div class="encore-search-results-list" id="encoreSearchResultsList"></div>
+                </div>
+                <div class="encore-search-no-results" id="encoreSearchNoResults" style="display: none;">
+                    <div class="encore-search-no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>No results found</h4>
+                    <p>Try searching for something else or browse our popular topics above.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Why Choose Us Hero Section -->
     <section class="encore-why-choose-hero">
         <div class="encore-floating-shape"></div>
         <div class="encore-container">
-            <div class="encore-section-header encore-bounce-in">
+            <div class="encore-section-header">
                 <h1 class="encore-section-title">Why Choose Digital Encore</h1>
                 <p class="encore-section-description">
                     We don't just build websites – we create digital ecosystems that drive your business forward
@@ -175,47 +239,224 @@
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="encore-process">
+    <!-- Vision & Mission Section -->
+    <section class="encore-vision-mission">
         <div class="encore-container">
             <div class="encore-section-header">
-                <h2 class="encore-section-title">Our Process</h2>
+                <h2 class="encore-section-title">Our Vision & Mission</h2>
                 <p class="encore-section-description">
-                    How we transform your business with our proven methodology
+                    The driving force behind everything we do at Digital Encore
                 </p>
             </div>
             
-            <div class="encore-process-steps">
-                <div class="encore-process-step">
-                    <div class="encore-process-number">01</div>
-                    <h3 class="encore-process-title">Discovery & Analysis</h3>
-                    <p class="encore-process-description">
-                        We start by understanding your business goals, target audience, and current challenges to create a tailored solution.
-                    </p>
+            <div class="encore-vision-mission-grid">
+                <div class="encore-vision-card encore-fade-in-left">
+                    <div class="encore-vision-icon">
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="encore-vision-content">
+                        <h3 class="encore-vision-title">Our Vision</h3>
+                        <p class="encore-vision-text">
+                            To be the leading catalyst for digital transformation, empowering businesses of all sizes 
+                            to thrive in the digital age through innovative technology solutions and exceptional service delivery.
+                        </p>
+                        <div class="encore-vision-highlight">
+                            <span class="encore-vision-tag">Future-Focused</span>
+                            <span class="encore-vision-tag">Innovation-Driven</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="encore-process-step">
-                    <div class="encore-process-number">02</div>
-                    <h3 class="encore-process-title">Strategy & Planning</h3>
-                    <p class="encore-process-description">
-                        Our team develops a comprehensive strategy that aligns with your objectives and maximizes your digital potential.
-                    </p>
+
+                <div class="encore-mission-card encore-fade-in-right">
+                    <div class="encore-mission-icon">
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="encore-mission-content">
+                        <h3 class="encore-mission-title">Our Mission</h3>
+                        <p class="encore-mission-text">
+                            We are committed to delivering cutting-edge digital solutions that streamline business operations, 
+                            enhance customer experiences, and drive sustainable growth through technology innovation and personalized service.
+                        </p>
+                        <div class="encore-mission-highlight">
+                            <span class="encore-mission-tag">Client-Centric</span>
+                            <span class="encore-mission-tag">Results-Oriented</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="encore-process-step">
-                    <div class="encore-process-number">03</div>
-                    <h3 class="encore-process-title">Design & Development</h3>
-                    <p class="encore-process-description">
-                        We create beautiful, functional solutions using the latest technologies and best practices in web development.
-                    </p>
+            </div>
+
+            <div class="encore-values-section encore-scale-up">
+                <h3 class="encore-values-title">Our Core Values</h3>
+                <div class="encore-values-grid">
+                    <div class="encore-value-item encore-stagger-item">
+                        <div class="encore-value-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="encore-value-name">Excellence</h4>
+                        <p class="encore-value-description">Delivering exceptional quality in every project</p>
+                    </div>
+                    
+                    <div class="encore-value-item encore-stagger-item">
+                        <div class="encore-value-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="encore-value-name">Integrity</h4>
+                        <p class="encore-value-description">Building trust through transparency and honesty</p>
+                    </div>
+                    
+                    <div class="encore-value-item encore-stagger-item">
+                        <div class="encore-value-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="encore-value-name">Collaboration</h4>
+                        <p class="encore-value-description">Working together to achieve shared success</p>
+                    </div>
+                    
+                    <div class="encore-value-item encore-stagger-item">
+                        <div class="encore-value-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="encore-value-name">Innovation</h4>
+                        <p class="encore-value-description">Embracing new technologies and creative solutions</p>
+                    </div>
                 </div>
-                
-                <div class="encore-process-step">
-                    <div class="encore-process-number">04</div>
-                    <h3 class="encore-process-title">Launch & Support</h3>
-                    <p class="encore-process-description">
-                        We ensure smooth deployment and provide ongoing support to help your business thrive in the digital landscape.
-                    </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="encore-process-modern">
+        <div class="encore-container">
+            <div class="encore-section-header">
+                <h2 class="encore-section-title">Our Proven Process</h2>
+                <p class="encore-section-description">
+                    A systematic approach that transforms your vision into digital reality
+                </p>
+            </div>
+            
+            <div class="encore-process-timeline">
+                <div class="encore-process-step-modern encore-fade-in-left">
+                    <div class="encore-step-visual">
+                        <div class="encore-step-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-step-number-modern">01</div>
+                    </div>
+                    <div class="encore-step-content-modern">
+                        <h3 class="encore-step-title-modern">Discovery & Analysis</h3>
+                        <p class="encore-step-description-modern">
+                            We dive deep into your business ecosystem, understanding your goals, challenges, and opportunities to craft a solution that perfectly fits your needs.
+                        </p>
+                        <div class="encore-step-features">
+                            <span class="encore-step-feature">Business Analysis</span>
+                            <span class="encore-step-feature">Market Research</span>
+                            <span class="encore-step-feature">Goal Setting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="encore-process-connector"></div>
+
+                <div class="encore-process-step-modern encore-fade-in-right">
+                    <div class="encore-step-visual">
+                        <div class="encore-step-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-step-number-modern">02</div>
+                    </div>
+                    <div class="encore-step-content-modern">
+                        <h3 class="encore-step-title-modern">Strategy & Planning</h3>
+                        <p class="encore-step-description-modern">
+                            Our experts develop a comprehensive roadmap that aligns with your objectives, ensuring every decision drives toward your success.
+                        </p>
+                        <div class="encore-step-features">
+                            <span class="encore-step-feature">Strategic Planning</span>
+                            <span class="encore-step-feature">Technical Architecture</span>
+                            <span class="encore-step-feature">Timeline Creation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="encore-process-connector"></div>
+
+                <div class="encore-process-step-modern encore-fade-in-left">
+                    <div class="encore-step-visual">
+                        <div class="encore-step-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-step-number-modern">03</div>
+                    </div>
+                    <div class="encore-step-content-modern">
+                        <h3 class="encore-step-title-modern">Design & Development</h3>
+                        <p class="encore-step-description-modern">
+                            We bring your vision to life with cutting-edge design and robust development, creating solutions that are both beautiful and powerful.
+                        </p>
+                        <div class="encore-step-features">
+                            <span class="encore-step-feature">UI/UX Design</span>
+                            <span class="encore-step-feature">Frontend Development</span>
+                            <span class="encore-step-feature">Backend Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="encore-process-connector"></div>
+
+                <div class="encore-process-step-modern encore-fade-in-right">
+                    <div class="encore-step-visual">
+                        <div class="encore-step-icon">
+                            <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="encore-step-number-modern">04</div>
+                    </div>
+                    <div class="encore-step-content-modern">
+                        <h3 class="encore-step-title-modern">Launch & Support</h3>
+                        <p class="encore-step-description-modern">
+                            We ensure seamless deployment and provide ongoing support, helping your business thrive in the digital landscape with continuous optimization.
+                        </p>
+                        <div class="encore-step-features">
+                            <span class="encore-step-feature">Deployment</span>
+                            <span class="encore-step-feature">Performance Monitoring</span>
+                            <span class="encore-step-feature">Ongoing Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="encore-process-summary encore-scale-up">
+                <div class="encore-summary-card">
+                    <div class="encore-summary-icon">
+                        <svg class="encore-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="encore-summary-content">
+                        <h3 class="encore-summary-title">Why Our Process Works</h3>
+                        <p class="encore-summary-description">
+                            Our systematic approach ensures every project delivers exceptional results through careful planning, 
+                            expert execution, and continuous optimization.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,7 +479,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="encore-footer encore-slide-up-rotate">
+    <footer class="encore-footer">
         <div class="encore-container">
             <div class="encore-footer-content">
                 <div class="encore-footer-brand">
