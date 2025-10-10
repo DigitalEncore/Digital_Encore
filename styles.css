@@ -825,6 +825,194 @@ body {
   .encore-stagger-item:nth-child(n) {
     transition-delay: 0.1s;
   }
+  
+  /* Fix horizontal scrollbar issue on mobile by reducing translation distance */
+  .encore-fade-in-left {
+    transform: translateX(-20px);
+  }
+  
+  .encore-fade-in-right {
+    transform: translateX(20px);
+  }
+  
+  /* Ensure no horizontal overflow on mobile for home page sections */
+  .encore-services-showcase,
+  .encore-contact-content {
+    overflow-x: hidden;
+  }
+  
+  /* Mobile Professional Left Alignment - All Pages */
+  
+  /* Service Categories */
+  .encore-service-category,
+  .encore-service-detailed-card {
+    text-align: left;
+  }
+  
+  .encore-category-header,
+  .encore-service-detailed-header {
+    text-align: left;
+    align-items: flex-start;
+  }
+  
+  .encore-category-icon,
+  .encore-service-detailed-icon {
+    margin: 0;
+  }
+  
+  /* Service Features */
+  .encore-service-features,
+  .encore-service-detailed-features {
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .encore-feature-item {
+    justify-content: flex-start;
+    text-align: left;
+    align-items: flex-start;
+  }
+  
+  /* Contact and Form Sections */
+  .encore-contact-info,
+  .encore-get-started-form-container {
+    text-align: left !important;
+  }
+  
+  .encore-contact-title,
+  .encore-form-title {
+    text-align: left !important;
+  }
+  
+  .encore-contact-description,
+  .encore-form-description {
+    text-align: left !important;
+  }
+  
+  /* Process and Timeline Sections */
+  .encore-process-step-modern,
+  .encore-step-content-modern {
+    text-align: left;
+  }
+  
+  .encore-step-title-modern,
+  .encore-step-description-modern {
+    text-align: left;
+  }
+  
+  /* Vision & Mission Cards */
+  .encore-vision-card,
+  .encore-mission-card {
+    text-align: left;
+  }
+  
+  .encore-vision-title,
+  .encore-mission-title,
+  .encore-vision-text,
+  .encore-mission-text {
+    text-align: left;
+  }
+  
+  /* Values Section */
+  .encore-value-item {
+    text-align: left;
+  }
+  
+  .encore-value-name,
+  .encore-value-description {
+    text-align: left;
+  }
+  
+  /* FAQ Section */
+  .encore-accordion-header,
+  .encore-accordion-body {
+    text-align: left;
+  }
+  
+  /* Chat Widget */
+  .encore-chat-message {
+    text-align: left;
+  }
+  
+  /* QR Code Section */
+  .encore-qr-content,
+  .encore-qr-description {
+    text-align: left;
+  }
+  
+  /* Flyer Section */
+  .encore-flyer-content,
+  .encore-flyer-description {
+    text-align: left;
+  }
+  
+  /* Summary Cards */
+  .encore-summary-card {
+    text-align: left;
+  }
+  
+  .encore-summary-title,
+  .encore-summary-description {
+    text-align: left;
+  }
+  
+  /* Additional Mobile Left Alignment Overrides */
+  
+  /* Override any existing center alignments */
+  .encore-benefit-item,
+  .encore-stat,
+  .encore-summary-card,
+  .encore-step-item,
+  .encore-qr-benefit,
+  .encore-flyer-content,
+  .encore-portrait-flyer-cta,
+  .encore-result-item,
+  .encore-diagram-step,
+  .encore-impact-item,
+  .encore-metric-story,
+  .encore-stat-item {
+    text-align: left !important;
+  }
+  
+  /* Form and input sections */
+  .encore-form-info,
+  .encore-get-started-text {
+    text-align: left !important;
+  }
+  
+  /* Process sections */
+  .encore-process-step,
+  .encore-step-content {
+    text-align: left !important;
+  }
+  
+  /* Timeline and workflow sections */
+  .encore-timeline-header,
+  .encore-workflow-header,
+  .encore-workflow-results,
+  .encore-workflow-cta {
+    text-align: left !important;
+  }
+  
+  /* Journey and dashboard sections */
+  .encore-journey-header,
+  .encore-dashboard-header,
+  .encore-story-header,
+  .encore-comparison-header,
+  .encore-view-header {
+    text-align: left !important;
+  }
+  
+  /* Keep center alignment for main titles and CTAs */
+  .encore-section-title,
+  .encore-hero-title,
+  .encore-hero-description,
+  .encore-services-cta,
+  .encore-cta-content,
+  .encore-btn {
+    text-align: center;
+  }
 }
 
 /* ========================================
@@ -2433,8 +2621,8 @@ body {
     
     .encore-service-detailed-header {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
         gap: var(--encore-space-4);
     }
     
@@ -2460,11 +2648,16 @@ body {
     .encore-service-detailed-features {
         grid-template-columns: 1fr;
         gap: var(--encore-space-3);
+        justify-items: flex-start;
+        align-items: flex-start;
     }
     
     .encore-feature-item {
         padding: var(--encore-space-3);
         border-radius: 12px;
+        justify-content: flex-start;
+        text-align: left;
+        align-items: flex-start;
     }
     
     .encore-feature-icon {
@@ -4434,14 +4627,15 @@ body {
 @media (max-width: 768px) {
   .encore-category-header {
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     gap: var(--encore-space-4);
+    align-items: flex-start;
   }
   
   .encore-category-icon {
     width: 60px;
     height: 60px;
-    align-self: center;
+    align-self: flex-start;
   }
   
   .encore-category-icon .encore-icon {
