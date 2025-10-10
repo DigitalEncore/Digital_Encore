@@ -6054,25 +6054,56 @@ body {
 .encore-accordion {
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--encore-space-4);
 }
 
 .encore-accordion-item {
-  background: var(--encore-bg-card);
-  border: 1px solid var(--encore-border-primary);
-  border-radius: var(--encore-radius-lg);
-  margin-bottom: var(--encore-space-4);
-  box-shadow: var(--encore-shadow-sm);
-  transition: all var(--encore-transition-normal);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  position: relative;
+}
+
+.encore-accordion-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--encore-primary), var(--encore-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .encore-accordion-item:hover {
-  box-shadow: var(--encore-shadow-md);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.encore-accordion-item:last-child {
-  margin-bottom: 0;
+.encore-accordion-item:hover::before {
+  opacity: 1;
+}
+
+.encore-accordion-item[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.encore-accordion-item[aria-expanded="true"]::before {
+  opacity: 1;
 }
 
 .encore-accordion-header {
@@ -6086,65 +6117,143 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: var(--encore-space-4);
-  transition: all var(--encore-transition-fast);
+  transition: all 0.3s ease;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .encore-accordion-header:hover {
-  background: var(--encore-bg-secondary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .encore-accordion-header:focus {
-  outline: 2px solid var(--encore-border-focus);
+  outline: 2px solid var(--encore-primary);
   outline-offset: -2px;
+  border-radius: 16px;
 }
 
 .encore-accordion-header[aria-expanded="true"] {
-  background: var(--encore-bg-secondary);
-  border-bottom: 1px solid var(--encore-border-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .encore-accordion-title {
   font-size: var(--encore-font-size-lg);
-  font-weight: var(--encore-font-weight-semibold);
+  font-weight: 600;
   color: var(--encore-text-primary);
-  line-height: var(--encore-line-height-normal);
+  line-height: 1.5;
   flex: 1;
+  transition: color 0.3s ease;
+}
+
+.encore-accordion-header:hover .encore-accordion-title {
+  color: var(--encore-primary);
 }
 
 .encore-accordion-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--encore-primary-600);
-  transition: transform var(--encore-transition-normal);
+  width: 24px;
+  height: 24px;
+  color: var(--encore-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.encore-accordion-header:hover .encore-accordion-icon {
+  background: var(--encore-primary);
+  color: white;
+  transform: scale(1.1);
 }
 
 .encore-accordion-header[aria-expanded="true"] .encore-accordion-icon {
   transform: rotate(180deg);
+  background: var(--encore-primary);
+  color: white;
 }
 
 .encore-accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--encore-transition-normal) ease-out, 
-              opacity var(--encore-transition-normal) ease-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
+  transform: translateY(-10px);
 }
 
 .encore-accordion-content.open {
-  max-height: 300px; /* Increased for better content display */
+  max-height: 500px;
   opacity: 1;
+  transform: translateY(0);
 }
 
 .encore-accordion-body {
   padding: 0 var(--encore-space-6) var(--encore-space-6);
+  position: relative;
+}
+
+.encore-accordion-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--encore-space-6);
+  right: var(--encore-space-6);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .encore-accordion-body p {
   color: var(--encore-text-secondary);
-  line-height: var(--encore-line-height-relaxed);
+  line-height: 1.7;
   margin: 0;
+  font-size: var(--encore-font-size-base);
+  padding-top: var(--encore-space-4);
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .encore-accordion-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .encore-accordion-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .encore-accordion-item[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .encore-accordion-header:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .encore-accordion-header[aria-expanded="true"] {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .encore-accordion-icon {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--encore-primary);
+}
+
+[data-theme="light"] .encore-accordion-header:hover .encore-accordion-icon {
+  background: var(--encore-primary);
+  color: white;
+}
+
+[data-theme="light"] .encore-accordion-body::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
 }
 
 /* Accordion Animation States */
@@ -8639,6 +8748,11 @@ body {
    HOW IT WORKS SECTION - 3D CAROUSEL
 ======================================== */
 
+/* Mobile Accordion - Hidden by default */
+.encore-mobile-accordion {
+    display: none;
+}
+
 .encore-how-it-works {
     padding: var(--encore-space-8) 0 8rem 0;
     background: linear-gradient(135deg, 
@@ -8945,7 +9059,7 @@ body {
     }
     
     .encore-industry-card:active .encore-industry-image::after {
-        opacity: 1;
+    opacity: 1;
     }
     
     .encore-explore-btn {
@@ -9921,37 +10035,272 @@ body {
 ======================================== */
 
 @media (max-width: 768px) {
+    /* Hide desktop carousel on mobile */
     .encore-carousel-container {
-        height: 400px;
+        display: none;
     }
     
-    .encore-3d-carousel {
-        width: 250px;
-        height: 350px;
+    /* Show mobile accordion */
+    .encore-mobile-accordion {
+        display: block !important;
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
     }
     
-    .encore-carousel-item {
-        width: 250px;
-        height: 350px;
+    /* Mobile Accordion Styles */
+    .encore-mobile-accordion .encore-accordion-item {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        margin-bottom: var(--encore-space-4);
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        transition: all 0.3s ease;
     }
     
-    .encore-carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
-    .encore-carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(300px); }
-    .encore-carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(300px); }
-    .encore-carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(300px); }
-    .encore-carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(300px); }
-    .encore-carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(300px); }
-    
-    .encore-industry-content {
-        padding: var(--encore-space-3);
+    .encore-mobile-accordion .encore-accordion-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
     
-    .encore-industry-title {
-        font-size: var(--encore-font-size-base);
+    .encore-mobile-accordion .encore-accordion-header {
+        display: flex;
+        align-items: center;
+        padding: var(--encore-space-5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        gap: var(--encore-space-4);
+        position: relative;
+        z-index: 10;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
     }
     
-    .encore-industry-description {
+    .encore-mobile-accordion .encore-accordion-header:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .encore-mobile-accordion .encore-accordion-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--encore-primary), var(--encore-secondary));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-title {
+        flex: 1;
+        text-align: left;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-title h3 {
+        font-size: var(--encore-font-size-lg);
+        font-weight: 600;
+        color: var(--encore-text-primary);
+        margin: 0 0 var(--encore-space-2) 0;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-title p {
+        font-size: var(--encore-font-size-sm);
+        color: var(--encore-text-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-toggle {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--encore-text-primary);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-item.active .encore-accordion-toggle {
+        transform: rotate(180deg);
+        background: var(--encore-primary);
+        color: white;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        opacity: 0;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-item.active .encore-accordion-content {
+        max-height: 2000px;
+        opacity: 1;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-workflow {
+        padding: 0 var(--encore-space-5) var(--encore-space-6) var(--encore-space-5);
+    }
+    
+    .encore-mobile-accordion .encore-accordion-workflow h4 {
+        font-size: var(--encore-font-size-lg);
+        font-weight: 600;
+        color: var(--encore-text-primary);
+        margin: 0 0 var(--encore-space-2) 0;
+        text-align: left;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-workflow > p {
+        font-size: var(--encore-font-size-sm);
+        color: var(--encore-text-secondary);
+        margin: 0 0 var(--encore-space-5) 0;
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-steps {
+        display: flex;
+        flex-direction: column;
+        gap: var(--encore-space-4);
+    }
+    
+    .encore-mobile-accordion .encore-accordion-step {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: var(--encore-space-4);
+        transition: all 0.3s ease;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-step:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .encore-mobile-accordion .encore-step-header {
+        display: flex;
+        align-items: center;
+        gap: var(--encore-space-3);
+        margin-bottom: var(--encore-space-3);
+    }
+    
+    .encore-mobile-accordion .encore-step-number {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, var(--encore-primary), var(--encore-secondary));
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: var(--encore-font-size-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+    
+    .encore-mobile-accordion .encore-step-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--encore-primary);
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    
+    .encore-mobile-accordion .encore-step-header h5 {
+        font-size: var(--encore-font-size-base);
+        font-weight: 600;
+        color: var(--encore-text-primary);
+        margin: 0;
+        flex: 1;
+        text-align: left;
+    }
+    
+    .encore-mobile-accordion .encore-accordion-step p {
+        font-size: var(--encore-font-size-sm);
+        color: var(--encore-text-secondary);
+        line-height: 1.6;
+        margin: 0 0 var(--encore-space-3) 0;
+        text-align: left;
+    }
+    
+    .encore-mobile-accordion .encore-step-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--encore-space-2);
+    }
+    
+    .encore-mobile-accordion .encore-step-features span {
+        display: flex;
+        align-items: center;
+        gap: var(--encore-space-2);
+        font-size: var(--encore-font-size-xs);
+        color: var(--encore-text-tertiary);
+        background: rgba(255, 255, 255, 0.05);
+        padding: var(--encore-space-2) var(--encore-space-3);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .encore-mobile-accordion .encore-step-features i {
+        color: var(--encore-primary);
+        font-size: 12px;
+    }
+    
+    /* Light mode adjustments for mobile accordion */
+    [data-theme="light"] .encore-mobile-accordion .encore-accordion-item {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    [data-theme="light"] .encore-mobile-accordion .encore-accordion-item:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    [data-theme="light"] .encore-mobile-accordion .encore-accordion-step {
+        background: rgba(0, 0, 0, 0.02);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    [data-theme="light"] .encore-mobile-accordion .encore-accordion-step:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.12);
+    }
+    
+    [data-theme="light"] .encore-mobile-accordion .encore-step-features span {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Adjust header position for mobile - closer to accordion */
+    .encore-how-it-works .encore-section-header {
+        margin-bottom: var(--encore-space-3);
+    }
+    
+    .encore-how-it-works .encore-section-title {
+        font-size: var(--encore-font-size-2xl);
+        margin-bottom: var(--encore-space-2);
+    }
+    
+    .encore-how-it-works .encore-section-description {
+        font-size: var(--encore-font-size-base);
+        line-height: 1.6;
+        margin-bottom: 0;
     }
     
     .encore-modal-content {

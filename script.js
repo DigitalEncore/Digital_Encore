@@ -2479,3 +2479,139 @@ function initializeSearch() {
     // Initialize
     showSuggestions();
 }
+
+// ========================================
+// MOBILE ACCORDION FUNCTIONALITY
+// ========================================
+
+function initializeMobileAccordion() {
+    const accordionItems = document.querySelectorAll('.encore-mobile-accordion .encore-accordion-item');
+    
+    console.log('Initializing mobile accordion...');
+    console.log('Found accordion items:', accordionItems.length);
+    
+    if (accordionItems.length === 0) {
+        console.log('No accordion items found. Retrying in 500ms...');
+        setTimeout(() => {
+            initializeMobileAccordion();
+        }, 500);
+        return;
+    }
+    
+    accordionItems.forEach((item, index) => {
+        const header = item.querySelector('.encore-accordion-header');
+        const content = item.querySelector('.encore-accordion-content');
+        
+        console.log(`Accordion item ${index}:`, { 
+            header: !!header, 
+            content: !!content,
+            itemClass: item.className 
+        });
+        
+        if (header && content) {
+            // Clear any existing event listeners by cloning the element
+            const newHeader = header.cloneNode(true);
+            header.parentNode.replaceChild(newHeader, header);
+            
+            // Add click event listener to the new header
+            newHeader.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Accordion clicked:', index);
+                
+                const isActive = item.classList.contains('active');
+                
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                    console.log('Closing accordion item:', index);
+                } else {
+                    item.classList.add('active');
+                    console.log('Opening accordion item:', index);
+                }
+            });
+            
+            // Add touch event for mobile devices
+            newHeader.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Accordion touched:', index);
+                
+                const isActive = item.classList.contains('active');
+                
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                    console.log('Closing accordion item (touch):', index);
+                } else {
+                    item.classList.add('active');
+                    console.log('Opening accordion item (touch):', index);
+                }
+            });
+            
+            // Add visual feedback
+            newHeader.style.cursor = 'pointer';
+            newHeader.style.userSelect = 'none';
+            newHeader.style.webkitUserSelect = 'none';
+        }
+    });
+    
+    console.log('Mobile accordion initialization complete');
+}
+
+function handleAccordionClick(e) {
+    // This function is defined but not used in the current implementation
+    // Keeping it for potential future use
+}
+
+// Initialize mobile accordion when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize with a small delay to ensure all elements are rendered
+    setTimeout(() => {
+        initializeMobileAccordion();
+    }, 100);
+});
+
+// Also initialize on window load as a fallback
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        initializeMobileAccordion();
+    }, 200);
+});
+
+// Debug function to test accordion manually
+window.testAccordion = function() {
+    console.log('Testing accordion manually...');
+    const accordionItems = document.querySelectorAll('.encore-accordion-item');
+    console.log('Found items:', accordionItems.length);
+    
+    if (accordionItems.length > 0) {
+        const firstItem = accordionItems[0];
+        const isActive = firstItem.classList.contains('active');
+        console.log('First item active:', isActive);
+        
+        if (isActive) {
+            firstItem.classList.remove('active');
+            console.log('Closed first item');
+        } else {
+            firstItem.classList.add('active');
+            console.log('Opened first item');
+        }
+    }
+};
